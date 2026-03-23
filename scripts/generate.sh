@@ -117,7 +117,12 @@ for service in "${services[@]}"; do
 		"${service_tmp}/.travis.yml" \
 		"${service_tmp}/git_push.sh" \
 		"${service_tmp}/test-requirements.txt" \
-		"${service_tmp}/tox.ini"
+		"${service_tmp}/tox.ini" \
+		"${service_tmp}/setup.cfg" \
+		"${service_tmp}/setup.py" \
+		"${service_tmp}/requirements.txt" \
+		"${service_tmp}/.gitignore" \
+		"${service_tmp}/.openapi-generator-ignore"
 
 	mkdir -p "${output_dir}"
 	rsync -a --delete \
