@@ -59,10 +59,10 @@ import rixl_images_sdk
 from rixl_images_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.rixl.com
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = rixl_images_sdk.Configuration(
-    host = "https://api.rixl.com"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -81,27 +81,32 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 with rixl_images_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = rixl_images_sdk.ImagesApi(api_client)
-    image_id = 'image_id_example' # str | Image ID
+    limit = 25 # int | Maximum number of items to return in a single request. <br> **Default:** `25` (optional) (default to 25)
+    offset = 0 # int | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional) (default to 0)
+    sort = 'created_at' # str | Field to sort by (created_at, name, size, updated_at) (optional)
+    order = 'desc' # str | Sort order (asc, desc) (optional)
 
     try:
-        # Delete image
-        api_instance.delete_images_image_id(image_id)
+        # List images for a project
+        api_response = api_instance.images_get(limit=limit, offset=offset, sort=sort, order=order)
+        print("The response of ImagesApi->images_get:\n")
+        pprint(api_response)
     except ApiException as e:
-        print("Exception when calling ImagesApi->delete_images_image_id: %s\n" % e)
+        print("Exception when calling ImagesApi->images_get: %s\n" % e)
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.rixl.com*
+All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ImagesApi* | [**delete_images_image_id**](docs/ImagesApi.md#delete_images_image_id) | **DELETE** /images/{imageId} | Delete image
-*ImagesApi* | [**get_images**](docs/ImagesApi.md#get_images) | **GET** /images | List images for a project
-*ImagesApi* | [**get_images_image_id**](docs/ImagesApi.md#get_images_image_id) | **GET** /images/{imageId} | Get image
-*ImagesApi* | [**post_images_upload_complete**](docs/ImagesApi.md#post_images_upload_complete) | **POST** /images/upload/complete | Upload: Mark as complete
-*ImagesApi* | [**post_images_upload_init**](docs/ImagesApi.md#post_images_upload_init) | **POST** /images/upload/init | Upload: Init
+*ImagesApi* | [**images_get**](docs/ImagesApi.md#images_get) | **GET** /images | List images for a project
+*ImagesApi* | [**images_image_id_delete**](docs/ImagesApi.md#images_image_id_delete) | **DELETE** /images/{imageId} | Delete image
+*ImagesApi* | [**images_image_id_get**](docs/ImagesApi.md#images_image_id_get) | **GET** /images/{imageId} | Get image
+*ImagesApi* | [**images_upload_complete_post**](docs/ImagesApi.md#images_upload_complete_post) | **POST** /images/upload/complete | Upload: Mark as complete
+*ImagesApi* | [**images_upload_init_post**](docs/ImagesApi.md#images_upload_init_post) | **POST** /images/upload/init | Upload: Init
 
 
 ## Documentation For Models
@@ -110,13 +115,13 @@ Class | Method | HTTP request | Description
  - [FileStatus](docs/FileStatus.md)
  - [GithubComQeeqezApiInternalErrorsErrorResponse](docs/GithubComQeeqezApiInternalErrorsErrorResponse.md)
  - [Image](docs/Image.md)
+ - [ImagesUploadCompletePostRequest](docs/ImagesUploadCompletePostRequest.md)
+ - [ImagesUploadInitPostRequest](docs/ImagesUploadInitPostRequest.md)
  - [InternalImagesHandlerCompleteRequest](docs/InternalImagesHandlerCompleteRequest.md)
  - [InternalImagesHandlerInitResponse](docs/InternalImagesHandlerInitResponse.md)
  - [InternalImagesHandlerUploadInitRequest](docs/InternalImagesHandlerUploadInitRequest.md)
  - [PaginationPaginatedResponseImage](docs/PaginationPaginatedResponseImage.md)
  - [PaginationPagination](docs/PaginationPagination.md)
- - [PostImagesUploadCompleteRequest](docs/PostImagesUploadCompleteRequest.md)
- - [PostImagesUploadInitRequest](docs/PostImagesUploadInitRequest.md)
 
 
 <a id="documentation-for-authorization"></a>
@@ -129,6 +134,13 @@ Authentication schemes defined for the API:
 
 - **Type**: API key
 - **API key parameter name**: X-API-Key
+- **Location**: HTTP header
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: API key
+- **API key parameter name**: Authorization
 - **Location**: HTTP header
 
 

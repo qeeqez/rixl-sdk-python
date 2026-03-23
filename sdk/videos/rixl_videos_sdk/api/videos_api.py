@@ -24,13 +24,13 @@ from rixl_videos_sdk.models.audio_track_delete import AudioTrackDelete
 from rixl_videos_sdk.models.github_com_qeeqez_api_internal_videos_handler_upload_init_response import GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
 from rixl_videos_sdk.models.internal_videos_handler_subtitles_language_response import InternalVideosHandlerSubtitlesLanguageResponse
 from rixl_videos_sdk.models.pagination_paginated_response_video import PaginationPaginatedResponseVideo
-from rixl_videos_sdk.models.post_videos_upload_complete_request import PostVideosUploadCompleteRequest
-from rixl_videos_sdk.models.post_videos_upload_init_request import PostVideosUploadInitRequest
-from rixl_videos_sdk.models.put_videos_video_id_chapters_request import PutVideosVideoIdChaptersRequest
 from rixl_videos_sdk.models.subtitle import Subtitle
 from rixl_videos_sdk.models.subtitle_delete import SubtitleDelete
 from rixl_videos_sdk.models.update_chapters_response import UpdateChaptersResponse
 from rixl_videos_sdk.models.video import Video
+from rixl_videos_sdk.models.videos_upload_complete_post_request import VideosUploadCompletePostRequest
+from rixl_videos_sdk.models.videos_upload_init_post_request import VideosUploadInitPostRequest
+from rixl_videos_sdk.models.videos_video_id_chapters_put_request import VideosVideoIdChaptersPutRequest
 
 from rixl_videos_sdk.api_client import ApiClient, RequestSerialized
 from rixl_videos_sdk.api_response import ApiResponse
@@ -51,2206 +51,7 @@ class VideosApi:
 
 
     @validate_call
-    def delete_videos_video_id_audio_tracks(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AudioTrackDelete:
-        """Delete all audio tracks
-
-        Remove all additional audio tracks from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AudioTrackDelete]:
-        """Delete all audio tracks
-
-        Remove all additional audio tracks from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete all audio tracks
-
-        Remove all additional audio tracks from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_audio_tracks_serialize(
-        self,
-        video_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/audio-tracks',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_lang_code(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AudioTrackDelete:
-        """Delete audio track by language
-
-        Remove an audio track for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_lang_code_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AudioTrackDelete]:
-        """Delete audio track by language
-
-        Remove an audio track for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_lang_code_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete audio track by language
-
-        Remove an audio track for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_audio_tracks_lang_code_serialize(
-        self,
-        video_id,
-        lang_code,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        if lang_code is not None:
-            _path_params['lang_code'] = lang_code
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/audio-tracks/{lang_code}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_track_id(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AudioTrackDelete:
-        """Delete audio track
-
-        Remove an additional audio track from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param track_id: Audio Track ID (required)
-        :type track_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_track_id_serialize(
-            video_id=video_id,
-            track_id=track_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_track_id_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AudioTrackDelete]:
-        """Delete audio track
-
-        Remove an additional audio track from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param track_id: Audio Track ID (required)
-        :type track_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_track_id_serialize(
-            video_id=video_id,
-            track_id=track_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_audio_tracks_track_id_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete audio track
-
-        Remove an additional audio track from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param track_id: Audio Track ID (required)
-        :type track_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_audio_tracks_track_id_serialize(
-            video_id=video_id,
-            track_id=track_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AudioTrackDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_audio_tracks_track_id_serialize(
-        self,
-        video_id,
-        track_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        if track_id is not None:
-            _path_params['trackId'] = track_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/audio-tracks/{trackId}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_chapters(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateChaptersResponse:
-        """Delete video chapters
-
-        Remove all chapters from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_chapters_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_chapters_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateChaptersResponse]:
-        """Delete video chapters
-
-        Remove all chapters from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_chapters_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_chapters_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete video chapters
-
-        Remove all chapters from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_chapters_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_chapters_serialize(
-        self,
-        video_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/chapters',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_delete(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete video
-
-        Delete a video by its ID within a project
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_delete_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_delete_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Delete video
-
-        Delete a video by its ID within a project
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_delete_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_delete_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete video
-
-        Delete a video by its ID within a project
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_delete_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_delete_serialize(
-        self,
-        video_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/delete',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SubtitleDelete:
-        """Delete all subtitles
-
-        Remove all subtitles from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SubtitleDelete]:
-        """Delete all subtitles
-
-        Remove all subtitles from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete all subtitles
-
-        Remove all subtitles from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_serialize(
-            video_id=video_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_subtitles_serialize(
-        self,
-        video_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/subtitles',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_lang_code(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SubtitleDelete:
-        """Delete subtitle by language
-
-        Remove a subtitle for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_lang_code_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SubtitleDelete]:
-        """Delete subtitle by language
-
-        Remove a subtitle for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_lang_code_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete subtitle by language
-
-        Remove a subtitle for a specific language using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param lang_code: Language Code (BCP 47) (required)
-        :type lang_code: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_lang_code_serialize(
-            video_id=video_id,
-            lang_code=lang_code,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_subtitles_lang_code_serialize(
-        self,
-        video_id,
-        lang_code,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        if lang_code is not None:
-            _path_params['lang_code'] = lang_code
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/subtitles/{lang_code}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_subtitle_id(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SubtitleDelete:
-        """Delete subtitle
-
-        Remove a subtitle from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param subtitle_id: Subtitle ID (required)
-        :type subtitle_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_subtitle_id_serialize(
-            video_id=video_id,
-            subtitle_id=subtitle_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_subtitle_id_with_http_info(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SubtitleDelete]:
-        """Delete subtitle
-
-        Remove a subtitle from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param subtitle_id: Subtitle ID (required)
-        :type subtitle_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_subtitle_id_serialize(
-            video_id=video_id,
-            subtitle_id=subtitle_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_videos_video_id_subtitles_subtitle_id_without_preload_content(
-        self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
-        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete subtitle
-
-        Remove a subtitle from a video using API key authentication
-
-        :param video_id: Video ID (required)
-        :type video_id: str
-        :param subtitle_id: Subtitle ID (required)
-        :type subtitle_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_videos_video_id_subtitles_subtitle_id_serialize(
-            video_id=video_id,
-            subtitle_id=subtitle_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SubtitleDelete",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_videos_video_id_subtitles_subtitle_id_serialize(
-        self,
-        video_id,
-        subtitle_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        if subtitle_id is not None:
-            _path_params['subtitleId'] = subtitle_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/videos/{videoId}/subtitles/{subtitleId}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_videos(
+    def videos_get(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -2303,7 +104,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_serialize(
+        _param = self._videos_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -2333,7 +134,7 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_with_http_info(
+    def videos_get_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -2386,7 +187,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_serialize(
+        _param = self._videos_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -2416,7 +217,7 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_without_preload_content(
+    def videos_get_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -2469,7 +270,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_serialize(
+        _param = self._videos_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -2494,7 +295,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _get_videos_serialize(
+    def _videos_get_serialize(
         self,
         limit,
         offset,
@@ -2576,7 +377,7 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_languages(
+    def videos_languages_get(
         self,
         _request_timeout: Union[
             None,
@@ -2617,7 +418,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_languages_serialize(
+        _param = self._videos_languages_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2639,7 +440,7 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_languages_with_http_info(
+    def videos_languages_get_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -2680,7 +481,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_languages_serialize(
+        _param = self._videos_languages_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2702,7 +503,7 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_languages_without_preload_content(
+    def videos_languages_get_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -2743,7 +544,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_languages_serialize(
+        _param = self._videos_languages_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2760,7 +561,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _get_videos_languages_serialize(
+    def _videos_languages_get_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2821,9 +622,9 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_video_id(
+    def videos_upload_complete_post(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_upload_complete_post_request: Annotated[VideosUploadCompletePostRequest, Field(description="Video upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2837,12 +638,12 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Video:
-        """Get a video
+        """Upload: Mark as complete
 
-        Retrieve a video by its ID for a specific project.
+        Mark a video upload as complete after successful upload to storage using API key authentication
 
-        :param video_id: Video ID (required)
-        :type video_id: str
+        :param videos_upload_complete_post_request: Video upload completion request (required)
+        :type videos_upload_complete_post_request: VideosUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2865,8 +666,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_video_id_serialize(
-            video_id=video_id,
+        _param = self._videos_upload_complete_post_serialize(
+            videos_upload_complete_post_request=videos_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2893,9 +694,9 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_video_id_with_http_info(
+    def videos_upload_complete_post_with_http_info(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_upload_complete_post_request: Annotated[VideosUploadCompletePostRequest, Field(description="Video upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2909,12 +710,12 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Video]:
-        """Get a video
+        """Upload: Mark as complete
 
-        Retrieve a video by its ID for a specific project.
+        Mark a video upload as complete after successful upload to storage using API key authentication
 
-        :param video_id: Video ID (required)
-        :type video_id: str
+        :param videos_upload_complete_post_request: Video upload completion request (required)
+        :type videos_upload_complete_post_request: VideosUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2937,8 +738,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_video_id_serialize(
-            video_id=video_id,
+        _param = self._videos_upload_complete_post_serialize(
+            videos_upload_complete_post_request=videos_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2965,9 +766,9 @@ class VideosApi:
 
 
     @validate_call
-    def get_videos_video_id_without_preload_content(
+    def videos_upload_complete_post_without_preload_content(
         self,
-        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_upload_complete_post_request: Annotated[VideosUploadCompletePostRequest, Field(description="Video upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2981,12 +782,12 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Get a video
+        """Upload: Mark as complete
 
-        Retrieve a video by its ID for a specific project.
+        Mark a video upload as complete after successful upload to storage using API key authentication
 
-        :param video_id: Video ID (required)
-        :type video_id: str
+        :param videos_upload_complete_post_request: Video upload completion request (required)
+        :type videos_upload_complete_post_request: VideosUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3009,8 +810,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_videos_video_id_serialize(
-            video_id=video_id,
+        _param = self._videos_upload_complete_post_serialize(
+            videos_upload_complete_post_request=videos_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3032,285 +833,9 @@ class VideosApi:
         return response_data.response
 
 
-    def _get_videos_video_id_serialize(
+    def _videos_upload_complete_post_serialize(
         self,
-        video_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if video_id is not None:
-            _path_params['videoId'] = video_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/videos/{videoId}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def post_videos_upload_complete(
-        self,
-        post_videos_upload_complete_request: Annotated[PostVideosUploadCompleteRequest, Field(description="Video upload completion request")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Video:
-        """Upload: Mark as complete
-
-        Mark a video upload as complete after successful upload to storage using API key authentication
-
-        :param post_videos_upload_complete_request: Video upload completion request (required)
-        :type post_videos_upload_complete_request: PostVideosUploadCompleteRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_videos_upload_complete_serialize(
-            post_videos_upload_complete_request=post_videos_upload_complete_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Video",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def post_videos_upload_complete_with_http_info(
-        self,
-        post_videos_upload_complete_request: Annotated[PostVideosUploadCompleteRequest, Field(description="Video upload completion request")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Video]:
-        """Upload: Mark as complete
-
-        Mark a video upload as complete after successful upload to storage using API key authentication
-
-        :param post_videos_upload_complete_request: Video upload completion request (required)
-        :type post_videos_upload_complete_request: PostVideosUploadCompleteRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_videos_upload_complete_serialize(
-            post_videos_upload_complete_request=post_videos_upload_complete_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Video",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def post_videos_upload_complete_without_preload_content(
-        self,
-        post_videos_upload_complete_request: Annotated[PostVideosUploadCompleteRequest, Field(description="Video upload completion request")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Upload: Mark as complete
-
-        Mark a video upload as complete after successful upload to storage using API key authentication
-
-        :param post_videos_upload_complete_request: Video upload completion request (required)
-        :type post_videos_upload_complete_request: PostVideosUploadCompleteRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._post_videos_upload_complete_serialize(
-            post_videos_upload_complete_request=post_videos_upload_complete_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Video",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _post_videos_upload_complete_serialize(
-        self,
-        post_videos_upload_complete_request,
+        videos_upload_complete_post_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3336,8 +861,8 @@ class VideosApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if post_videos_upload_complete_request is not None:
-            _body_params = post_videos_upload_complete_request
+        if videos_upload_complete_post_request is not None:
+            _body_params = videos_upload_complete_post_request
 
 
         # set the HTTP header `Accept`
@@ -3386,9 +911,9 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_upload_init(
+    def videos_upload_init_post(
         self,
-        post_videos_upload_init_request: Annotated[PostVideosUploadInitRequest, Field(description="Video upload initialization request")],
+        videos_upload_init_post_request: Annotated[VideosUploadInitPostRequest, Field(description="Video upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3406,8 +931,8 @@ class VideosApi:
 
         Initialize a video upload and get presigned URLs for video and poster using API key authentication
 
-        :param post_videos_upload_init_request: Video upload initialization request (required)
-        :type post_videos_upload_init_request: PostVideosUploadInitRequest
+        :param videos_upload_init_post_request: Video upload initialization request (required)
+        :type videos_upload_init_post_request: VideosUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3430,8 +955,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_upload_init_serialize(
-            post_videos_upload_init_request=post_videos_upload_init_request,
+        _param = self._videos_upload_init_post_serialize(
+            videos_upload_init_post_request=videos_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3457,9 +982,9 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_upload_init_with_http_info(
+    def videos_upload_init_post_with_http_info(
         self,
-        post_videos_upload_init_request: Annotated[PostVideosUploadInitRequest, Field(description="Video upload initialization request")],
+        videos_upload_init_post_request: Annotated[VideosUploadInitPostRequest, Field(description="Video upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3477,8 +1002,8 @@ class VideosApi:
 
         Initialize a video upload and get presigned URLs for video and poster using API key authentication
 
-        :param post_videos_upload_init_request: Video upload initialization request (required)
-        :type post_videos_upload_init_request: PostVideosUploadInitRequest
+        :param videos_upload_init_post_request: Video upload initialization request (required)
+        :type videos_upload_init_post_request: VideosUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3501,8 +1026,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_upload_init_serialize(
-            post_videos_upload_init_request=post_videos_upload_init_request,
+        _param = self._videos_upload_init_post_serialize(
+            videos_upload_init_post_request=videos_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3528,9 +1053,9 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_upload_init_without_preload_content(
+    def videos_upload_init_post_without_preload_content(
         self,
-        post_videos_upload_init_request: Annotated[PostVideosUploadInitRequest, Field(description="Video upload initialization request")],
+        videos_upload_init_post_request: Annotated[VideosUploadInitPostRequest, Field(description="Video upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3548,8 +1073,8 @@ class VideosApi:
 
         Initialize a video upload and get presigned URLs for video and poster using API key authentication
 
-        :param post_videos_upload_init_request: Video upload initialization request (required)
-        :type post_videos_upload_init_request: PostVideosUploadInitRequest
+        :param videos_upload_init_post_request: Video upload initialization request (required)
+        :type videos_upload_init_post_request: VideosUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3572,8 +1097,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_upload_init_serialize(
-            post_videos_upload_init_request=post_videos_upload_init_request,
+        _param = self._videos_upload_init_post_serialize(
+            videos_upload_init_post_request=videos_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3594,9 +1119,9 @@ class VideosApi:
         return response_data.response
 
 
-    def _post_videos_upload_init_serialize(
+    def _videos_upload_init_post_serialize(
         self,
-        post_videos_upload_init_request,
+        videos_upload_init_post_request,
         _request_auth,
         _content_type,
         _headers,
@@ -3622,8 +1147,8 @@ class VideosApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if post_videos_upload_init_request is not None:
-            _body_params = post_videos_upload_init_request
+        if videos_upload_init_post_request is not None:
+            _body_params = videos_upload_init_post_request
 
 
         # set the HTTP header `Accept`
@@ -3672,7 +1197,7 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_audio_tracks(
+    def videos_video_id_audio_tracks_delete(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -3687,10 +1212,10 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AudioTrack]:
-        """Bulk upsert video audio tracks
+    ) -> AudioTrackDelete:
+        """Delete all audio tracks
 
-        Replace all audio tracks with the provided ones using API key authentication
+        Remove all additional audio tracks from a video using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
@@ -3716,7 +1241,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_audio_tracks_serialize(
+        _param = self._videos_video_id_audio_tracks_delete_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3725,7 +1250,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AudioTrack]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3739,7 +1264,7 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_audio_tracks_with_http_info(
+    def videos_video_id_audio_tracks_delete_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -3754,10 +1279,10 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[AudioTrack]]:
-        """Bulk upsert video audio tracks
+    ) -> ApiResponse[AudioTrackDelete]:
+        """Delete all audio tracks
 
-        Replace all audio tracks with the provided ones using API key authentication
+        Remove all additional audio tracks from a video using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
@@ -3783,7 +1308,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_audio_tracks_serialize(
+        _param = self._videos_video_id_audio_tracks_delete_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3792,7 +1317,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AudioTrack]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3806,7 +1331,7 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_audio_tracks_without_preload_content(
+    def videos_video_id_audio_tracks_delete_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -3822,9 +1347,9 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Bulk upsert video audio tracks
+        """Delete all audio tracks
 
-        Replace all audio tracks with the provided ones using API key authentication
+        Remove all additional audio tracks from a video using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
@@ -3850,7 +1375,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_audio_tracks_serialize(
+        _param = self._videos_video_id_audio_tracks_delete_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3859,7 +1384,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[AudioTrack]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3868,7 +1393,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _post_videos_video_id_audio_tracks_serialize(
+    def _videos_video_id_audio_tracks_delete_serialize(
         self,
         video_id,
         _request_auth,
@@ -3908,20 +1433,6 @@ class VideosApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/x-www-form-urlencoded', 
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -3929,7 +1440,7 @@ class VideosApi:
         ]
 
         return self.api_client.param_serialize(
-            method='POST',
+            method='DELETE',
             resource_path='/videos/{videoId}/audio-tracks',
             path_params=_path_params,
             query_params=_query_params,
@@ -3947,9 +1458,10 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_subtitles(
+    def videos_video_id_audio_tracks_lang_code_delete(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3962,13 +1474,15 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[Subtitle]:
-        """Bulk upsert video subtitles
+    ) -> AudioTrackDelete:
+        """Delete audio track by language
 
-        Replace all subtitles with the provided ones using API key authentication
+        Remove an audio track for a specific language using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3991,8 +1505,9 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_subtitles_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_delete_serialize(
             video_id=video_id,
+            lang_code=lang_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4000,7 +1515,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Subtitle]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4014,9 +1529,10 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_subtitles_with_http_info(
+    def videos_video_id_audio_tracks_lang_code_delete_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4029,13 +1545,15 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[Subtitle]]:
-        """Bulk upsert video subtitles
+    ) -> ApiResponse[AudioTrackDelete]:
+        """Delete audio track by language
 
-        Replace all subtitles with the provided ones using API key authentication
+        Remove an audio track for a specific language using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4058,8 +1576,9 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_subtitles_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_delete_serialize(
             video_id=video_id,
+            lang_code=lang_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4067,7 +1586,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Subtitle]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4081,9 +1600,10 @@ class VideosApi:
 
 
     @validate_call
-    def post_videos_video_id_subtitles_without_preload_content(
+    def videos_video_id_audio_tracks_lang_code_delete_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4097,12 +1617,14 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Bulk upsert video subtitles
+        """Delete audio track by language
 
-        Replace all subtitles with the provided ones using API key authentication
+        Remove an audio track for a specific language using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4125,8 +1647,9 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_videos_video_id_subtitles_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_delete_serialize(
             video_id=video_id,
+            lang_code=lang_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4134,7 +1657,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Subtitle]",
+            '200': "AudioTrackDelete",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4143,9 +1666,10 @@ class VideosApi:
         return response_data.response
 
 
-    def _post_videos_video_id_subtitles_serialize(
+    def _videos_video_id_audio_tracks_lang_code_delete_serialize(
         self,
         video_id,
+        lang_code,
         _request_auth,
         _content_type,
         _headers,
@@ -4169,6 +1693,8 @@ class VideosApi:
         # process the path parameters
         if video_id is not None:
             _path_params['videoId'] = video_id
+        if lang_code is not None:
+            _path_params['lang_code'] = lang_code
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4183,20 +1709,6 @@ class VideosApi:
                 ]
             )
 
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/x-www-form-urlencoded', 
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -4204,8 +1716,8 @@ class VideosApi:
         ]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/videos/{videoId}/subtitles',
+            method='DELETE',
+            resource_path='/videos/{videoId}/audio-tracks/{lang_code}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4222,7 +1734,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_audio_tracks_lang_code(
+    def videos_video_id_audio_tracks_lang_code_put(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -4269,7 +1781,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_audio_tracks_lang_code_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -4293,7 +1805,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_audio_tracks_lang_code_with_http_info(
+    def videos_video_id_audio_tracks_lang_code_put_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -4340,7 +1852,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_audio_tracks_lang_code_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -4364,7 +1876,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_audio_tracks_lang_code_without_preload_content(
+    def videos_video_id_audio_tracks_lang_code_put_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -4411,7 +1923,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_audio_tracks_lang_code_serialize(
+        _param = self._videos_video_id_audio_tracks_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -4430,7 +1942,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _put_videos_video_id_audio_tracks_lang_code_serialize(
+    def _videos_video_id_audio_tracks_lang_code_put_serialize(
         self,
         video_id,
         lang_code,
@@ -4512,10 +2024,9 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_chapters(
+    def videos_video_id_audio_tracks_post(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
-        put_videos_video_id_chapters_request: Annotated[PutVideosVideoIdChaptersRequest, Field(description="Chapters array")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4528,15 +2039,13 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateChaptersResponse:
-        """Update video chapters
+    ) -> List[AudioTrack]:
+        """Bulk upsert video audio tracks
 
-        Replace all chapters for a video (atomic PUT operation) using API key authentication
+        Replace all audio tracks with the provided ones using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
-        :param put_videos_video_id_chapters_request: Chapters array (required)
-        :type put_videos_video_id_chapters_request: PutVideosVideoIdChaptersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4559,9 +2068,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_chapters_serialize(
+        _param = self._videos_video_id_audio_tracks_post_serialize(
             video_id=video_id,
-            put_videos_video_id_chapters_request=put_videos_video_id_chapters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4569,12 +2077,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '200': "List[AudioTrack]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4588,10 +2091,9 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_chapters_with_http_info(
+    def videos_video_id_audio_tracks_post_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
-        put_videos_video_id_chapters_request: Annotated[PutVideosVideoIdChaptersRequest, Field(description="Chapters array")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4604,15 +2106,13 @@ class VideosApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateChaptersResponse]:
-        """Update video chapters
+    ) -> ApiResponse[List[AudioTrack]]:
+        """Bulk upsert video audio tracks
 
-        Replace all chapters for a video (atomic PUT operation) using API key authentication
+        Replace all audio tracks with the provided ones using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
-        :param put_videos_video_id_chapters_request: Chapters array (required)
-        :type put_videos_video_id_chapters_request: PutVideosVideoIdChaptersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4635,9 +2135,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_chapters_serialize(
+        _param = self._videos_video_id_audio_tracks_post_serialize(
             video_id=video_id,
-            put_videos_video_id_chapters_request=put_videos_video_id_chapters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4645,12 +2144,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '200': "List[AudioTrack]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4664,10 +2158,9 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_chapters_without_preload_content(
+    def videos_video_id_audio_tracks_post_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
-        put_videos_video_id_chapters_request: Annotated[PutVideosVideoIdChaptersRequest, Field(description="Chapters array")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4681,14 +2174,12 @@ class VideosApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Update video chapters
+        """Bulk upsert video audio tracks
 
-        Replace all chapters for a video (atomic PUT operation) using API key authentication
+        Replace all audio tracks with the provided ones using API key authentication
 
         :param video_id: Video ID (required)
         :type video_id: str
-        :param put_videos_video_id_chapters_request: Chapters array (required)
-        :type put_videos_video_id_chapters_request: PutVideosVideoIdChaptersRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4711,9 +2202,8 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_chapters_serialize(
+        _param = self._videos_video_id_audio_tracks_post_serialize(
             video_id=video_id,
-            put_videos_video_id_chapters_request=put_videos_video_id_chapters_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4721,12 +2211,7 @@ class VideosApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateChaptersResponse",
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '200': "List[AudioTrack]",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -4735,10 +2220,9 @@ class VideosApi:
         return response_data.response
 
 
-    def _put_videos_video_id_chapters_serialize(
+    def _videos_video_id_audio_tracks_post_serialize(
         self,
         video_id,
-        put_videos_video_id_chapters_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4766,8 +2250,872 @@ class VideosApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if put_videos_video_id_chapters_request is not None:
-            _body_params = put_videos_video_id_chapters_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/videos/{videoId}/audio-tracks',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_audio_tracks_track_id_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AudioTrackDelete:
+        """Delete audio track
+
+        Remove an additional audio track from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param track_id: Audio Track ID (required)
+        :type track_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_audio_tracks_track_id_delete_serialize(
+            video_id=video_id,
+            track_id=track_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AudioTrackDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_audio_tracks_track_id_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[AudioTrackDelete]:
+        """Delete audio track
+
+        Remove an additional audio track from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param track_id: Audio Track ID (required)
+        :type track_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_audio_tracks_track_id_delete_serialize(
+            video_id=video_id,
+            track_id=track_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AudioTrackDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_audio_tracks_track_id_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        track_id: Annotated[StrictStr, Field(description="Audio Track ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete audio track
+
+        Remove an additional audio track from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param track_id: Audio Track ID (required)
+        :type track_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_audio_tracks_track_id_delete_serialize(
+            video_id=video_id,
+            track_id=track_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AudioTrackDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_audio_tracks_track_id_delete_serialize(
+        self,
+        video_id,
+        track_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        if track_id is not None:
+            _path_params['trackId'] = track_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/audio-tracks/{trackId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_chapters_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UpdateChaptersResponse:
+        """Delete video chapters
+
+        Remove all chapters from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_chapters_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UpdateChaptersResponse]:
+        """Delete video chapters
+
+        Remove all chapters from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_chapters_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete video chapters
+
+        Remove all chapters from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_chapters_delete_serialize(
+        self,
+        video_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/chapters',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_chapters_put(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_video_id_chapters_put_request: Annotated[VideosVideoIdChaptersPutRequest, Field(description="Chapters array")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UpdateChaptersResponse:
+        """Update video chapters
+
+        Replace all chapters for a video (atomic PUT operation) using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param videos_video_id_chapters_put_request: Chapters array (required)
+        :type videos_video_id_chapters_put_request: VideosVideoIdChaptersPutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_put_serialize(
+            video_id=video_id,
+            videos_video_id_chapters_put_request=videos_video_id_chapters_put_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_chapters_put_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_video_id_chapters_put_request: Annotated[VideosVideoIdChaptersPutRequest, Field(description="Chapters array")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UpdateChaptersResponse]:
+        """Update video chapters
+
+        Replace all chapters for a video (atomic PUT operation) using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param videos_video_id_chapters_put_request: Chapters array (required)
+        :type videos_video_id_chapters_put_request: VideosVideoIdChaptersPutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_put_serialize(
+            video_id=video_id,
+            videos_video_id_chapters_put_request=videos_video_id_chapters_put_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_chapters_put_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        videos_video_id_chapters_put_request: Annotated[VideosVideoIdChaptersPutRequest, Field(description="Chapters array")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update video chapters
+
+        Replace all chapters for a video (atomic PUT operation) using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param videos_video_id_chapters_put_request: Chapters array (required)
+        :type videos_video_id_chapters_put_request: VideosVideoIdChaptersPutRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_chapters_put_serialize(
+            video_id=video_id,
+            videos_video_id_chapters_put_request=videos_video_id_chapters_put_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateChaptersResponse",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_chapters_put_serialize(
+        self,
+        video_id,
+        videos_video_id_chapters_put_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if videos_video_id_chapters_put_request is not None:
+            _body_params = videos_video_id_chapters_put_request
 
 
         # set the HTTP header `Accept`
@@ -4816,7 +3164,1096 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_subtitles_lang_code(
+    def videos_video_id_delete_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Delete video
+
+        Delete a video by its ID within a project
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_delete_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_delete_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Delete video
+
+        Delete a video by its ID within a project
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_delete_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_delete_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete video
+
+        Delete a video by its ID within a project
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_delete_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_delete_delete_serialize(
+        self,
+        video_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/delete',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_get(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Video:
+        """Get a video
+
+        Retrieve a video by its ID for a specific project.
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_get_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Video",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_get_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Video]:
+        """Get a video
+
+        Retrieve a video by its ID for a specific project.
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_get_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Video",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_get_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get a video
+
+        Retrieve a video by its ID for a specific project.
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_get_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Video",
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_get_serialize(
+        self,
+        video_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/videos/{videoId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_subtitles_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SubtitleDelete:
+        """Delete all subtitles
+
+        Remove all subtitles from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_subtitles_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SubtitleDelete]:
+        """Delete all subtitles
+
+        Remove all subtitles from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_subtitles_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete all subtitles
+
+        Remove all subtitles from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_delete_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_subtitles_delete_serialize(
+        self,
+        video_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/subtitles',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_subtitles_lang_code_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SubtitleDelete:
+        """Delete subtitle by language
+
+        Remove a subtitle for a specific language using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_lang_code_delete_serialize(
+            video_id=video_id,
+            lang_code=lang_code,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_subtitles_lang_code_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SubtitleDelete]:
+        """Delete subtitle by language
+
+        Remove a subtitle for a specific language using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_lang_code_delete_serialize(
+            video_id=video_id,
+            lang_code=lang_code,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_subtitles_lang_code_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete subtitle by language
+
+        Remove a subtitle for a specific language using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param lang_code: Language Code (BCP 47) (required)
+        :type lang_code: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_lang_code_delete_serialize(
+            video_id=video_id,
+            lang_code=lang_code,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_subtitles_lang_code_delete_serialize(
+        self,
+        video_id,
+        lang_code,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        if lang_code is not None:
+            _path_params['lang_code'] = lang_code
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/subtitles/{lang_code}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_subtitles_lang_code_put(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -4863,7 +4300,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_subtitles_lang_code_serialize(
+        _param = self._videos_video_id_subtitles_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -4887,7 +4324,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_subtitles_lang_code_with_http_info(
+    def videos_video_id_subtitles_lang_code_put_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -4934,7 +4371,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_subtitles_lang_code_serialize(
+        _param = self._videos_video_id_subtitles_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -4958,7 +4395,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_subtitles_lang_code_without_preload_content(
+    def videos_video_id_subtitles_lang_code_put_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         lang_code: Annotated[StrictStr, Field(description="Language Code (BCP 47)")],
@@ -5005,7 +4442,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_subtitles_lang_code_serialize(
+        _param = self._videos_video_id_subtitles_lang_code_put_serialize(
             video_id=video_id,
             lang_code=lang_code,
             _request_auth=_request_auth,
@@ -5024,7 +4461,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _put_videos_video_id_subtitles_lang_code_serialize(
+    def _videos_video_id_subtitles_lang_code_put_serialize(
         self,
         video_id,
         lang_code,
@@ -5106,7 +4543,570 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_thumbnail(
+    def videos_video_id_subtitles_post(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> List[Subtitle]:
+        """Bulk upsert video subtitles
+
+        Replace all subtitles with the provided ones using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_post_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[Subtitle]",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_subtitles_post_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[Subtitle]]:
+        """Bulk upsert video subtitles
+
+        Replace all subtitles with the provided ones using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_post_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[Subtitle]",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_subtitles_post_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Bulk upsert video subtitles
+
+        Replace all subtitles with the provided ones using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_post_serialize(
+            video_id=video_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[Subtitle]",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_subtitles_post_serialize(
+        self,
+        video_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded', 
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/videos/{videoId}/subtitles',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_subtitles_subtitle_id_delete(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SubtitleDelete:
+        """Delete subtitle
+
+        Remove a subtitle from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param subtitle_id: Subtitle ID (required)
+        :type subtitle_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_subtitle_id_delete_serialize(
+            video_id=video_id,
+            subtitle_id=subtitle_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def videos_video_id_subtitles_subtitle_id_delete_with_http_info(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SubtitleDelete]:
+        """Delete subtitle
+
+        Remove a subtitle from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param subtitle_id: Subtitle ID (required)
+        :type subtitle_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_subtitle_id_delete_serialize(
+            video_id=video_id,
+            subtitle_id=subtitle_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def videos_video_id_subtitles_subtitle_id_delete_without_preload_content(
+        self,
+        video_id: Annotated[StrictStr, Field(description="Video ID")],
+        subtitle_id: Annotated[StrictStr, Field(description="Subtitle ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete subtitle
+
+        Remove a subtitle from a video using API key authentication
+
+        :param video_id: Video ID (required)
+        :type video_id: str
+        :param subtitle_id: Subtitle ID (required)
+        :type subtitle_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._videos_video_id_subtitles_subtitle_id_delete_serialize(
+            video_id=video_id,
+            subtitle_id=subtitle_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "SubtitleDelete",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _videos_video_id_subtitles_subtitle_id_delete_serialize(
+        self,
+        video_id,
+        subtitle_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if video_id is not None:
+            _path_params['videoId'] = video_id
+        if subtitle_id is not None:
+            _path_params['subtitleId'] = subtitle_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/videos/{videoId}/subtitles/{subtitleId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def videos_video_id_thumbnail_put(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -5150,7 +5150,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_thumbnail_serialize(
+        _param = self._videos_video_id_thumbnail_put_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5178,7 +5178,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_thumbnail_with_http_info(
+    def videos_video_id_thumbnail_put_with_http_info(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -5222,7 +5222,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_thumbnail_serialize(
+        _param = self._videos_video_id_thumbnail_put_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5250,7 +5250,7 @@ class VideosApi:
 
 
     @validate_call
-    def put_videos_video_id_thumbnail_without_preload_content(
+    def videos_video_id_thumbnail_put_without_preload_content(
         self,
         video_id: Annotated[StrictStr, Field(description="Video ID")],
         _request_timeout: Union[
@@ -5294,7 +5294,7 @@ class VideosApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._put_videos_video_id_thumbnail_serialize(
+        _param = self._videos_video_id_thumbnail_put_serialize(
             video_id=video_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5317,7 +5317,7 @@ class VideosApi:
         return response_data.response
 
 
-    def _put_videos_video_id_thumbnail_serialize(
+    def _videos_video_id_thumbnail_put_serialize(
         self,
         video_id,
         _request_auth,

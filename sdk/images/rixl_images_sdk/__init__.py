@@ -33,13 +33,13 @@ __all__ = [
     "FileStatus",
     "GithubComQeeqezApiInternalErrorsErrorResponse",
     "Image",
+    "ImagesUploadCompletePostRequest",
+    "ImagesUploadInitPostRequest",
     "InternalImagesHandlerCompleteRequest",
     "InternalImagesHandlerInitResponse",
     "InternalImagesHandlerUploadInitRequest",
     "PaginationPaginatedResponseImage",
     "PaginationPagination",
-    "PostImagesUploadCompleteRequest",
-    "PostImagesUploadInitRequest",
 ]
 
 # import apis into sdk package
@@ -61,11 +61,11 @@ from rixl_images_sdk.models.file import File as File
 from rixl_images_sdk.models.file_status import FileStatus as FileStatus
 from rixl_images_sdk.models.github_com_qeeqez_api_internal_errors_error_response import GithubComQeeqezApiInternalErrorsErrorResponse as GithubComQeeqezApiInternalErrorsErrorResponse
 from rixl_images_sdk.models.image import Image as Image
+from rixl_images_sdk.models.images_upload_complete_post_request import ImagesUploadCompletePostRequest as ImagesUploadCompletePostRequest
+from rixl_images_sdk.models.images_upload_init_post_request import ImagesUploadInitPostRequest as ImagesUploadInitPostRequest
 from rixl_images_sdk.models.internal_images_handler_complete_request import InternalImagesHandlerCompleteRequest as InternalImagesHandlerCompleteRequest
 from rixl_images_sdk.models.internal_images_handler_init_response import InternalImagesHandlerInitResponse as InternalImagesHandlerInitResponse
 from rixl_images_sdk.models.internal_images_handler_upload_init_request import InternalImagesHandlerUploadInitRequest as InternalImagesHandlerUploadInitRequest
 from rixl_images_sdk.models.pagination_paginated_response_image import PaginationPaginatedResponseImage as PaginationPaginatedResponseImage
 from rixl_images_sdk.models.pagination_pagination import PaginationPagination as PaginationPagination
-from rixl_images_sdk.models.post_images_upload_complete_request import PostImagesUploadCompleteRequest as PostImagesUploadCompleteRequest
-from rixl_images_sdk.models.post_images_upload_init_request import PostImagesUploadInitRequest as PostImagesUploadInitRequest
 

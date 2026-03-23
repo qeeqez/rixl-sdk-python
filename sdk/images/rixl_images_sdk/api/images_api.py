@@ -20,10 +20,10 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from rixl_images_sdk.models.image import Image
+from rixl_images_sdk.models.images_upload_complete_post_request import ImagesUploadCompletePostRequest
+from rixl_images_sdk.models.images_upload_init_post_request import ImagesUploadInitPostRequest
 from rixl_images_sdk.models.internal_images_handler_init_response import InternalImagesHandlerInitResponse
 from rixl_images_sdk.models.pagination_paginated_response_image import PaginationPaginatedResponseImage
-from rixl_images_sdk.models.post_images_upload_complete_request import PostImagesUploadCompleteRequest
-from rixl_images_sdk.models.post_images_upload_init_request import PostImagesUploadInitRequest
 
 from rixl_images_sdk.api_client import ApiClient, RequestSerialized
 from rixl_images_sdk.api_response import ApiResponse
@@ -44,283 +44,7 @@ class ImagesApi:
 
 
     @validate_call
-    def delete_images_image_id(
-        self,
-        image_id: Annotated[StrictStr, Field(description="Image ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Delete image
-
-        delete an image by marking it as deleted
-
-        :param image_id: Image ID (required)
-        :type image_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_images_image_id_serialize(
-            image_id=image_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def delete_images_image_id_with_http_info(
-        self,
-        image_id: Annotated[StrictStr, Field(description="Image ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Delete image
-
-        delete an image by marking it as deleted
-
-        :param image_id: Image ID (required)
-        :type image_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_images_image_id_serialize(
-            image_id=image_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def delete_images_image_id_without_preload_content(
-        self,
-        image_id: Annotated[StrictStr, Field(description="Image ID")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Delete image
-
-        delete an image by marking it as deleted
-
-        :param image_id: Image ID (required)
-        :type image_id: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._delete_images_image_id_serialize(
-            image_id=image_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
-            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _delete_images_image_id_serialize(
-        self,
-        image_id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if image_id is not None:
-            _path_params['imageId'] = image_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'ApiKeyAuth'
-        ]
-
-        return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/images/{imageId}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_images(
+    def images_get(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -373,7 +97,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_serialize(
+        _param = self._images_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -403,7 +127,7 @@ class ImagesApi:
 
 
     @validate_call
-    def get_images_with_http_info(
+    def images_get_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -456,7 +180,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_serialize(
+        _param = self._images_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -486,7 +210,7 @@ class ImagesApi:
 
 
     @validate_call
-    def get_images_without_preload_content(
+    def images_get_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="Maximum number of items to return in a single request. <br> **Default:** `25`")] = None,
         offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0`")] = None,
@@ -539,7 +263,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_serialize(
+        _param = self._images_get_serialize(
             limit=limit,
             offset=offset,
             sort=sort,
@@ -564,7 +288,7 @@ class ImagesApi:
         return response_data.response
 
 
-    def _get_images_serialize(
+    def _images_get_serialize(
         self,
         limit,
         offset,
@@ -646,7 +370,283 @@ class ImagesApi:
 
 
     @validate_call
-    def get_images_image_id(
+    def images_image_id_delete(
+        self,
+        image_id: Annotated[StrictStr, Field(description="Image ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Delete image
+
+        delete an image by marking it as deleted
+
+        :param image_id: Image ID (required)
+        :type image_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._images_image_id_delete_serialize(
+            image_id=image_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def images_image_id_delete_with_http_info(
+        self,
+        image_id: Annotated[StrictStr, Field(description="Image ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Delete image
+
+        delete an image by marking it as deleted
+
+        :param image_id: Image ID (required)
+        :type image_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._images_image_id_delete_serialize(
+            image_id=image_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def images_image_id_delete_without_preload_content(
+        self,
+        image_id: Annotated[StrictStr, Field(description="Image ID")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete image
+
+        delete an image by marking it as deleted
+
+        :param image_id: Image ID (required)
+        :type image_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._images_image_id_delete_serialize(
+            image_id=image_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '204': None,
+            '400': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '401': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '403': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '404': "GithubComQeeqezApiInternalErrorsErrorResponse",
+            '500': "GithubComQeeqezApiInternalErrorsErrorResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _images_image_id_delete_serialize(
+        self,
+        image_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if image_id is not None:
+            _path_params['imageId'] = image_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'ApiKeyAuth'
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/images/{imageId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def images_image_id_get(
         self,
         image_id: Annotated[StrictStr, Field(description="Image ID")],
         _request_timeout: Union[
@@ -690,7 +690,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_image_id_serialize(
+        _param = self._images_image_id_get_serialize(
             image_id=image_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -718,7 +718,7 @@ class ImagesApi:
 
 
     @validate_call
-    def get_images_image_id_with_http_info(
+    def images_image_id_get_with_http_info(
         self,
         image_id: Annotated[StrictStr, Field(description="Image ID")],
         _request_timeout: Union[
@@ -762,7 +762,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_image_id_serialize(
+        _param = self._images_image_id_get_serialize(
             image_id=image_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -790,7 +790,7 @@ class ImagesApi:
 
 
     @validate_call
-    def get_images_image_id_without_preload_content(
+    def images_image_id_get_without_preload_content(
         self,
         image_id: Annotated[StrictStr, Field(description="Image ID")],
         _request_timeout: Union[
@@ -834,7 +834,7 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_images_image_id_serialize(
+        _param = self._images_image_id_get_serialize(
             image_id=image_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -857,7 +857,7 @@ class ImagesApi:
         return response_data.response
 
 
-    def _get_images_image_id_serialize(
+    def _images_image_id_get_serialize(
         self,
         image_id,
         _request_auth,
@@ -922,9 +922,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_complete(
+    def images_upload_complete_post(
         self,
-        post_images_upload_complete_request: Annotated[PostImagesUploadCompleteRequest, Field(description="Upload completion request")],
+        images_upload_complete_post_request: Annotated[ImagesUploadCompletePostRequest, Field(description="Upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -942,8 +942,8 @@ class ImagesApi:
 
         Complete the upload process and create the image record using API key authentication
 
-        :param post_images_upload_complete_request: Upload completion request (required)
-        :type post_images_upload_complete_request: PostImagesUploadCompleteRequest
+        :param images_upload_complete_post_request: Upload completion request (required)
+        :type images_upload_complete_post_request: ImagesUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -966,8 +966,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_complete_serialize(
-            post_images_upload_complete_request=post_images_upload_complete_request,
+        _param = self._images_upload_complete_post_serialize(
+            images_upload_complete_post_request=images_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -994,9 +994,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_complete_with_http_info(
+    def images_upload_complete_post_with_http_info(
         self,
-        post_images_upload_complete_request: Annotated[PostImagesUploadCompleteRequest, Field(description="Upload completion request")],
+        images_upload_complete_post_request: Annotated[ImagesUploadCompletePostRequest, Field(description="Upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1014,8 +1014,8 @@ class ImagesApi:
 
         Complete the upload process and create the image record using API key authentication
 
-        :param post_images_upload_complete_request: Upload completion request (required)
-        :type post_images_upload_complete_request: PostImagesUploadCompleteRequest
+        :param images_upload_complete_post_request: Upload completion request (required)
+        :type images_upload_complete_post_request: ImagesUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1038,8 +1038,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_complete_serialize(
-            post_images_upload_complete_request=post_images_upload_complete_request,
+        _param = self._images_upload_complete_post_serialize(
+            images_upload_complete_post_request=images_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1066,9 +1066,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_complete_without_preload_content(
+    def images_upload_complete_post_without_preload_content(
         self,
-        post_images_upload_complete_request: Annotated[PostImagesUploadCompleteRequest, Field(description="Upload completion request")],
+        images_upload_complete_post_request: Annotated[ImagesUploadCompletePostRequest, Field(description="Upload completion request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1086,8 +1086,8 @@ class ImagesApi:
 
         Complete the upload process and create the image record using API key authentication
 
-        :param post_images_upload_complete_request: Upload completion request (required)
-        :type post_images_upload_complete_request: PostImagesUploadCompleteRequest
+        :param images_upload_complete_post_request: Upload completion request (required)
+        :type images_upload_complete_post_request: ImagesUploadCompletePostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1110,8 +1110,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_complete_serialize(
-            post_images_upload_complete_request=post_images_upload_complete_request,
+        _param = self._images_upload_complete_post_serialize(
+            images_upload_complete_post_request=images_upload_complete_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1133,9 +1133,9 @@ class ImagesApi:
         return response_data.response
 
 
-    def _post_images_upload_complete_serialize(
+    def _images_upload_complete_post_serialize(
         self,
-        post_images_upload_complete_request,
+        images_upload_complete_post_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1161,8 +1161,8 @@ class ImagesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if post_images_upload_complete_request is not None:
-            _body_params = post_images_upload_complete_request
+        if images_upload_complete_post_request is not None:
+            _body_params = images_upload_complete_post_request
 
 
         # set the HTTP header `Accept`
@@ -1211,9 +1211,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_init(
+    def images_upload_init_post(
         self,
-        post_images_upload_init_request: Annotated[PostImagesUploadInitRequest, Field(description="Upload initialization request")],
+        images_upload_init_post_request: Annotated[ImagesUploadInitPostRequest, Field(description="Upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1231,8 +1231,8 @@ class ImagesApi:
 
         Initialize a presigned URL upload for an image file using API key authentication
 
-        :param post_images_upload_init_request: Upload initialization request (required)
-        :type post_images_upload_init_request: PostImagesUploadInitRequest
+        :param images_upload_init_post_request: Upload initialization request (required)
+        :type images_upload_init_post_request: ImagesUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1255,8 +1255,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_init_serialize(
-            post_images_upload_init_request=post_images_upload_init_request,
+        _param = self._images_upload_init_post_serialize(
+            images_upload_init_post_request=images_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1282,9 +1282,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_init_with_http_info(
+    def images_upload_init_post_with_http_info(
         self,
-        post_images_upload_init_request: Annotated[PostImagesUploadInitRequest, Field(description="Upload initialization request")],
+        images_upload_init_post_request: Annotated[ImagesUploadInitPostRequest, Field(description="Upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1302,8 +1302,8 @@ class ImagesApi:
 
         Initialize a presigned URL upload for an image file using API key authentication
 
-        :param post_images_upload_init_request: Upload initialization request (required)
-        :type post_images_upload_init_request: PostImagesUploadInitRequest
+        :param images_upload_init_post_request: Upload initialization request (required)
+        :type images_upload_init_post_request: ImagesUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1326,8 +1326,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_init_serialize(
-            post_images_upload_init_request=post_images_upload_init_request,
+        _param = self._images_upload_init_post_serialize(
+            images_upload_init_post_request=images_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1353,9 +1353,9 @@ class ImagesApi:
 
 
     @validate_call
-    def post_images_upload_init_without_preload_content(
+    def images_upload_init_post_without_preload_content(
         self,
-        post_images_upload_init_request: Annotated[PostImagesUploadInitRequest, Field(description="Upload initialization request")],
+        images_upload_init_post_request: Annotated[ImagesUploadInitPostRequest, Field(description="Upload initialization request")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1373,8 +1373,8 @@ class ImagesApi:
 
         Initialize a presigned URL upload for an image file using API key authentication
 
-        :param post_images_upload_init_request: Upload initialization request (required)
-        :type post_images_upload_init_request: PostImagesUploadInitRequest
+        :param images_upload_init_post_request: Upload initialization request (required)
+        :type images_upload_init_post_request: ImagesUploadInitPostRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1397,8 +1397,8 @@ class ImagesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_images_upload_init_serialize(
-            post_images_upload_init_request=post_images_upload_init_request,
+        _param = self._images_upload_init_post_serialize(
+            images_upload_init_post_request=images_upload_init_post_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1419,9 +1419,9 @@ class ImagesApi:
         return response_data.response
 
 
-    def _post_images_upload_init_serialize(
+    def _images_upload_init_post_serialize(
         self,
-        post_images_upload_init_request,
+        images_upload_init_post_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1447,8 +1447,8 @@ class ImagesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if post_images_upload_init_request is not None:
-            _body_params = post_images_upload_init_request
+        if images_upload_init_post_request is not None:
+            _body_params = images_upload_init_post_request
 
 
         # set the HTTP header `Accept`

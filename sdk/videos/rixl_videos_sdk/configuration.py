@@ -113,6 +113,7 @@ AuthSettings = TypedDict(
     "AuthSettings",
     {
         "ApiKeyAuth": APIKeyAuthSetting,
+        "Bearer": APIKeyAuthSetting,
     },
     total=False,
 )
@@ -212,7 +213,7 @@ conf = rixl_videos_sdk.Configuration(
     ) -> None:
         """Constructor
         """
-        self._base_path = "https://api.rixl.com" if host is None else host
+        self._base_path = "http://localhost" if host is None else host
         """Default Base url
         """
         self.server_index = 0 if server_index is None and host is None else server_index
@@ -524,6 +525,15 @@ conf = rixl_videos_sdk.Configuration(
                     'ApiKeyAuth',
                 ),
             }
+        if 'Bearer' in self.api_key:
+            auth['Bearer'] = {
+                'type': 'api_key',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': self.get_api_key_with_prefix(
+                    'Bearer',
+                ),
+            }
         return auth
 
     def to_debug_report(self) -> str:
@@ -545,7 +555,7 @@ conf = rixl_videos_sdk.Configuration(
         """
         return [
             {
-                'url': "https://api.rixl.com",
+                'url': "",
                 'description': "No description provided",
             }
         ]

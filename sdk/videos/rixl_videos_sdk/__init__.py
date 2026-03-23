@@ -44,15 +44,15 @@ __all__ = [
     "InternalVideosHandlerSubtitlesLanguageResponse",
     "PaginationPaginatedResponseVideo",
     "PaginationPagination",
-    "PostVideosUploadCompleteRequest",
-    "PostVideosUploadInitRequest",
-    "PutVideosVideoIdChaptersRequest",
     "Subtitle",
     "SubtitleDelete",
     "UpdateChaptersRequest",
     "UpdateChaptersResponse",
     "Video",
     "VideoUploadInitRequest",
+    "VideosUploadCompletePostRequest",
+    "VideosUploadInitPostRequest",
+    "VideosVideoIdChaptersPutRequest",
 ]
 
 # import apis into sdk package
@@ -85,13 +85,13 @@ from rixl_videos_sdk.models.image import Image as Image
 from rixl_videos_sdk.models.internal_videos_handler_subtitles_language_response import InternalVideosHandlerSubtitlesLanguageResponse as InternalVideosHandlerSubtitlesLanguageResponse
 from rixl_videos_sdk.models.pagination_paginated_response_video import PaginationPaginatedResponseVideo as PaginationPaginatedResponseVideo
 from rixl_videos_sdk.models.pagination_pagination import PaginationPagination as PaginationPagination
-from rixl_videos_sdk.models.post_videos_upload_complete_request import PostVideosUploadCompleteRequest as PostVideosUploadCompleteRequest
-from rixl_videos_sdk.models.post_videos_upload_init_request import PostVideosUploadInitRequest as PostVideosUploadInitRequest
-from rixl_videos_sdk.models.put_videos_video_id_chapters_request import PutVideosVideoIdChaptersRequest as PutVideosVideoIdChaptersRequest
 from rixl_videos_sdk.models.subtitle import Subtitle as Subtitle
 from rixl_videos_sdk.models.subtitle_delete import SubtitleDelete as SubtitleDelete
 from rixl_videos_sdk.models.update_chapters_request import UpdateChaptersRequest as UpdateChaptersRequest
 from rixl_videos_sdk.models.update_chapters_response import UpdateChaptersResponse as UpdateChaptersResponse
 from rixl_videos_sdk.models.video import Video as Video
 from rixl_videos_sdk.models.video_upload_init_request import VideoUploadInitRequest as VideoUploadInitRequest
+from rixl_videos_sdk.models.videos_upload_complete_post_request import VideosUploadCompletePostRequest as VideosUploadCompletePostRequest
+from rixl_videos_sdk.models.videos_upload_init_post_request import VideosUploadInitPostRequest as VideosUploadInitPostRequest
+from rixl_videos_sdk.models.videos_video_id_chapters_put_request import VideosVideoIdChaptersPutRequest as VideosVideoIdChaptersPutRequest
 

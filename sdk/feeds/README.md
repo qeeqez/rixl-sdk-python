@@ -59,10 +59,10 @@ import rixl_feeds_sdk
 from rixl_feeds_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.rixl.com
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = rixl_feeds_sdk.Configuration(
-    host = "https://api.rixl.com"
+    host = "http://localhost"
 )
 
 
@@ -71,29 +71,30 @@ configuration = rixl_feeds_sdk.Configuration(
 with rixl_feeds_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = rixl_feeds_sdk.FeedsApi(api_client)
-    feed_id = 'feed_id_example' # str | Feed ID
+    feed_id = 'F4edRI23XL' # str | Feed ID
+    creator_id = 'C6rtRI23XL' # str | Creator ID
     limit = 25 # int | Maximum number of items to return in a single request. <br> **Default:** `25` (optional) (default to 25)
     offset = 0 # int | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional) (default to 0)
 
     try:
-        # List posts in a feed
-        api_response = api_instance.get_feeds_feed_id(feed_id, limit=limit, offset=offset)
-        print("The response of FeedsApi->get_feeds_feed_id:\n")
+        # List posts by creator
+        api_response = api_instance.feeds_feed_id_creators_creator_id_get(feed_id, creator_id, limit=limit, offset=offset)
+        print("The response of FeedsApi->feeds_feed_id_creators_creator_id_get:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling FeedsApi->get_feeds_feed_id: %s\n" % e)
+        print("Exception when calling FeedsApi->feeds_feed_id_creators_creator_id_get: %s\n" % e)
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.rixl.com*
+All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FeedsApi* | [**get_feeds_feed_id**](docs/FeedsApi.md#get_feeds_feed_id) | **GET** /feeds/{feedId} | List posts in a feed
-*FeedsApi* | [**get_feeds_feed_id_creators_creator_id**](docs/FeedsApi.md#get_feeds_feed_id_creators_creator_id) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
-*FeedsApi* | [**get_feeds_feed_id_post_id**](docs/FeedsApi.md#get_feeds_feed_id_post_id) | **GET** /feeds/{feedId}/{postId} | Get a post
+*FeedsApi* | [**feeds_feed_id_creators_creator_id_get**](docs/FeedsApi.md#feeds_feed_id_creators_creator_id_get) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
+*FeedsApi* | [**feeds_feed_id_get**](docs/FeedsApi.md#feeds_feed_id_get) | **GET** /feeds/{feedId} | List posts in a feed
+*FeedsApi* | [**feeds_feed_id_post_id_get**](docs/FeedsApi.md#feeds_feed_id_post_id_get) | **GET** /feeds/{feedId}/{postId} | Get a post
 
 
 ## Documentation For Models
@@ -121,6 +122,13 @@ Authentication schemes defined for the API:
 
 - **Type**: API key
 - **API key parameter name**: X-API-Key
+- **Location**: HTTP header
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: API key
+- **API key parameter name**: Authorization
 - **Location**: HTTP header
 
 

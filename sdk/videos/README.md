@@ -59,10 +59,10 @@ import rixl_videos_sdk
 from rixl_videos_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api.rixl.com
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = rixl_videos_sdk.Configuration(
-    host = "https://api.rixl.com"
+    host = "http://localhost"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -81,43 +81,46 @@ configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
 with rixl_videos_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = rixl_videos_sdk.VideosApi(api_client)
-    video_id = 'video_id_example' # str | Video ID
+    limit = 25 # int | Maximum number of items to return in a single request. <br> **Default:** `25` (optional) (default to 25)
+    offset = 0 # int | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional) (default to 0)
+    sort = 'created_at' # str | Field to sort by (created_at, name, size, updated_at, duration) (optional)
+    order = 'desc' # str | Sort order (asc, desc) (optional)
 
     try:
-        # Delete all audio tracks
-        api_response = api_instance.delete_videos_video_id_audio_tracks(video_id)
-        print("The response of VideosApi->delete_videos_video_id_audio_tracks:\n")
+        # List videos for a project
+        api_response = api_instance.videos_get(limit=limit, offset=offset, sort=sort, order=order)
+        print("The response of VideosApi->videos_get:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling VideosApi->delete_videos_video_id_audio_tracks: %s\n" % e)
+        print("Exception when calling VideosApi->videos_get: %s\n" % e)
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.rixl.com*
+All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*VideosApi* | [**delete_videos_video_id_audio_tracks**](docs/VideosApi.md#delete_videos_video_id_audio_tracks) | **DELETE** /videos/{videoId}/audio-tracks | Delete all audio tracks
-*VideosApi* | [**delete_videos_video_id_audio_tracks_lang_code**](docs/VideosApi.md#delete_videos_video_id_audio_tracks_lang_code) | **DELETE** /videos/{videoId}/audio-tracks/{lang_code} | Delete audio track by language
-*VideosApi* | [**delete_videos_video_id_audio_tracks_track_id**](docs/VideosApi.md#delete_videos_video_id_audio_tracks_track_id) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
-*VideosApi* | [**delete_videos_video_id_chapters**](docs/VideosApi.md#delete_videos_video_id_chapters) | **DELETE** /videos/{videoId}/chapters | Delete video chapters
-*VideosApi* | [**delete_videos_video_id_delete**](docs/VideosApi.md#delete_videos_video_id_delete) | **DELETE** /videos/{videoId}/delete | Delete video
-*VideosApi* | [**delete_videos_video_id_subtitles**](docs/VideosApi.md#delete_videos_video_id_subtitles) | **DELETE** /videos/{videoId}/subtitles | Delete all subtitles
-*VideosApi* | [**delete_videos_video_id_subtitles_lang_code**](docs/VideosApi.md#delete_videos_video_id_subtitles_lang_code) | **DELETE** /videos/{videoId}/subtitles/{lang_code} | Delete subtitle by language
-*VideosApi* | [**delete_videos_video_id_subtitles_subtitle_id**](docs/VideosApi.md#delete_videos_video_id_subtitles_subtitle_id) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
-*VideosApi* | [**get_videos**](docs/VideosApi.md#get_videos) | **GET** /videos | List videos for a project
-*VideosApi* | [**get_videos_languages**](docs/VideosApi.md#get_videos_languages) | **GET** /videos/languages | List available subtitle languages
-*VideosApi* | [**get_videos_video_id**](docs/VideosApi.md#get_videos_video_id) | **GET** /videos/{videoId} | Get a video
-*VideosApi* | [**post_videos_upload_complete**](docs/VideosApi.md#post_videos_upload_complete) | **POST** /videos/upload/complete | Upload: Mark as complete
-*VideosApi* | [**post_videos_upload_init**](docs/VideosApi.md#post_videos_upload_init) | **POST** /videos/upload/init | Upload: Init
-*VideosApi* | [**post_videos_video_id_audio_tracks**](docs/VideosApi.md#post_videos_video_id_audio_tracks) | **POST** /videos/{videoId}/audio-tracks | Bulk upsert video audio tracks
-*VideosApi* | [**post_videos_video_id_subtitles**](docs/VideosApi.md#post_videos_video_id_subtitles) | **POST** /videos/{videoId}/subtitles | Bulk upsert video subtitles
-*VideosApi* | [**put_videos_video_id_audio_tracks_lang_code**](docs/VideosApi.md#put_videos_video_id_audio_tracks_lang_code) | **PUT** /videos/{videoId}/audio-tracks/{lang_code} | Upsert video audio track
-*VideosApi* | [**put_videos_video_id_chapters**](docs/VideosApi.md#put_videos_video_id_chapters) | **PUT** /videos/{videoId}/chapters | Update video chapters
-*VideosApi* | [**put_videos_video_id_subtitles_lang_code**](docs/VideosApi.md#put_videos_video_id_subtitles_lang_code) | **PUT** /videos/{videoId}/subtitles/{lang_code} | Upsert video subtitle
-*VideosApi* | [**put_videos_video_id_thumbnail**](docs/VideosApi.md#put_videos_video_id_thumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
+*VideosApi* | [**videos_get**](docs/VideosApi.md#videos_get) | **GET** /videos | List videos for a project
+*VideosApi* | [**videos_languages_get**](docs/VideosApi.md#videos_languages_get) | **GET** /videos/languages | List available subtitle languages
+*VideosApi* | [**videos_upload_complete_post**](docs/VideosApi.md#videos_upload_complete_post) | **POST** /videos/upload/complete | Upload: Mark as complete
+*VideosApi* | [**videos_upload_init_post**](docs/VideosApi.md#videos_upload_init_post) | **POST** /videos/upload/init | Upload: Init
+*VideosApi* | [**videos_video_id_audio_tracks_delete**](docs/VideosApi.md#videos_video_id_audio_tracks_delete) | **DELETE** /videos/{videoId}/audio-tracks | Delete all audio tracks
+*VideosApi* | [**videos_video_id_audio_tracks_lang_code_delete**](docs/VideosApi.md#videos_video_id_audio_tracks_lang_code_delete) | **DELETE** /videos/{videoId}/audio-tracks/{lang_code} | Delete audio track by language
+*VideosApi* | [**videos_video_id_audio_tracks_lang_code_put**](docs/VideosApi.md#videos_video_id_audio_tracks_lang_code_put) | **PUT** /videos/{videoId}/audio-tracks/{lang_code} | Upsert video audio track
+*VideosApi* | [**videos_video_id_audio_tracks_post**](docs/VideosApi.md#videos_video_id_audio_tracks_post) | **POST** /videos/{videoId}/audio-tracks | Bulk upsert video audio tracks
+*VideosApi* | [**videos_video_id_audio_tracks_track_id_delete**](docs/VideosApi.md#videos_video_id_audio_tracks_track_id_delete) | **DELETE** /videos/{videoId}/audio-tracks/{trackId} | Delete audio track
+*VideosApi* | [**videos_video_id_chapters_delete**](docs/VideosApi.md#videos_video_id_chapters_delete) | **DELETE** /videos/{videoId}/chapters | Delete video chapters
+*VideosApi* | [**videos_video_id_chapters_put**](docs/VideosApi.md#videos_video_id_chapters_put) | **PUT** /videos/{videoId}/chapters | Update video chapters
+*VideosApi* | [**videos_video_id_delete_delete**](docs/VideosApi.md#videos_video_id_delete_delete) | **DELETE** /videos/{videoId}/delete | Delete video
+*VideosApi* | [**videos_video_id_get**](docs/VideosApi.md#videos_video_id_get) | **GET** /videos/{videoId} | Get a video
+*VideosApi* | [**videos_video_id_subtitles_delete**](docs/VideosApi.md#videos_video_id_subtitles_delete) | **DELETE** /videos/{videoId}/subtitles | Delete all subtitles
+*VideosApi* | [**videos_video_id_subtitles_lang_code_delete**](docs/VideosApi.md#videos_video_id_subtitles_lang_code_delete) | **DELETE** /videos/{videoId}/subtitles/{lang_code} | Delete subtitle by language
+*VideosApi* | [**videos_video_id_subtitles_lang_code_put**](docs/VideosApi.md#videos_video_id_subtitles_lang_code_put) | **PUT** /videos/{videoId}/subtitles/{lang_code} | Upsert video subtitle
+*VideosApi* | [**videos_video_id_subtitles_post**](docs/VideosApi.md#videos_video_id_subtitles_post) | **POST** /videos/{videoId}/subtitles | Bulk upsert video subtitles
+*VideosApi* | [**videos_video_id_subtitles_subtitle_id_delete**](docs/VideosApi.md#videos_video_id_subtitles_subtitle_id_delete) | **DELETE** /videos/{videoId}/subtitles/{subtitleId} | Delete subtitle
+*VideosApi* | [**videos_video_id_thumbnail_put**](docs/VideosApi.md#videos_video_id_thumbnail_put) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
 
 
 ## Documentation For Models
@@ -137,15 +140,15 @@ Class | Method | HTTP request | Description
  - [InternalVideosHandlerSubtitlesLanguageResponse](docs/InternalVideosHandlerSubtitlesLanguageResponse.md)
  - [PaginationPaginatedResponseVideo](docs/PaginationPaginatedResponseVideo.md)
  - [PaginationPagination](docs/PaginationPagination.md)
- - [PostVideosUploadCompleteRequest](docs/PostVideosUploadCompleteRequest.md)
- - [PostVideosUploadInitRequest](docs/PostVideosUploadInitRequest.md)
- - [PutVideosVideoIdChaptersRequest](docs/PutVideosVideoIdChaptersRequest.md)
  - [Subtitle](docs/Subtitle.md)
  - [SubtitleDelete](docs/SubtitleDelete.md)
  - [UpdateChaptersRequest](docs/UpdateChaptersRequest.md)
  - [UpdateChaptersResponse](docs/UpdateChaptersResponse.md)
  - [Video](docs/Video.md)
  - [VideoUploadInitRequest](docs/VideoUploadInitRequest.md)
+ - [VideosUploadCompletePostRequest](docs/VideosUploadCompletePostRequest.md)
+ - [VideosUploadInitPostRequest](docs/VideosUploadInitPostRequest.md)
+ - [VideosVideoIdChaptersPutRequest](docs/VideosVideoIdChaptersPutRequest.md)
 
 
 <a id="documentation-for-authorization"></a>
@@ -158,6 +161,13 @@ Authentication schemes defined for the API:
 
 - **Type**: API key
 - **API key parameter name**: X-API-Key
+- **Location**: HTTP header
+
+<a id="Bearer"></a>
+### Bearer
+
+- **Type**: API key
+- **API key parameter name**: Authorization
 - **Location**: HTTP header
 
 
