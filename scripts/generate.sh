@@ -4,7 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
-INPUT_SPEC="${ROOT_DIR}/openapi/public.swagger.json"
+PREPARED_SPEC="${ROOT_DIR}/openapi/public.swagger.json"
+SERVICES_DIR="${ROOT_DIR}/openapi/services"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "${TMP_DIR}"' EXIT
 
@@ -23,7 +24,7 @@ require_command() {
 usage() {
 	cat <<'EOF'
 Usage:
-  ./scripts/generate.sh [--service feeds|videos|images] [--spec /path/to/swagger.json]
+  ./scripts/generate.sh [--service feeds|videos|images] [--spec /path/to/openapi.json]
 EOF
 }
 
@@ -70,36 +71,38 @@ if [[ -n "${service_arg}" ]]; then
 	validate_service "${service_arg}"
 fi
 
-if [[ -n "${spec_arg}" ]]; then
-	"${SCRIPT_DIR}/prepare-spec.sh" "${spec_arg}"
-fi
-
 require_command java
 require_command npx
 require_command perl
 require_command rsync
 require_command jq
 
-if [[ ! -f "${INPUT_SPEC}" ]]; then
-	echo "sanitized SDK spec not found at ${INPUT_SPEC}" >&2
-	echo "run scripts/prepare-spec.sh first or pass --spec /path/to/swagger.json" >&2
-	exit 1
-fi
-
 services=("${ALL_SERVICES[@]}")
 if [[ -n "${service_arg}" ]]; then
 	services=("${service_arg}")
 fi
 
-mkdir -p "${ROOT_DIR}/sdk" "${ROOT_DIR}/openapi/services"
+mkdir -p "${ROOT_DIR}/sdk" "${SERVICES_DIR}"
+
+if [[ -n "${spec_arg}" ]]; then
+	cp "${spec_arg}" "${PREPARED_SPEC}"
+	for service in "${services[@]}"; do
+		service_spec="${SERVICES_DIR}/${service}.swagger.json"
+		bash "${ROOT_DIR}/../api/sdk/openapi/split-spec.sh" "${PREPARED_SPEC}" "${service}" "${service_spec}"
+	done
+fi
 
 for service in "${services[@]}"; do
-	service_spec="${ROOT_DIR}/openapi/services/${service}.swagger.json"
+	service_spec="${SERVICES_DIR}/${service}.swagger.json"
 	service_tmp="${TMP_DIR}/out-${service}"
 	output_dir="${ROOT_DIR}/sdk/${service}"
 	package_name="rixl_${service}_sdk"
 
-	"${SCRIPT_DIR}/split-spec.sh" "${INPUT_SPEC}" "${service}" "${service_spec}"
+	if [[ ! -f "${service_spec}" ]]; then
+		echo "service spec not found at ${service_spec}" >&2
+		echo "run with --spec /path/to/openapi.json to refresh local service specs" >&2
+		exit 1
+	fi
 
 	npx -y @openapitools/openapi-generator-cli generate \
 		-g python \
@@ -109,7 +112,6 @@ for service in "${services[@]}"; do
 		--additional-properties "packageName=${package_name},projectName=${package_name},packageVersion=2.0.0,packageUrl=https://github.com/qeeqez/rixl-sdk-python"
 
 	perl -0pi -e "s{http://localhost}{https://api.rixl.com}g; s{https://github.com/GIT_USER_ID/GIT_REPO_ID}{https://github.com/qeeqez/rixl-sdk-python}g" "${service_tmp}/README.md" "${service_tmp}/pyproject.toml"
-	perl -0pi -e 's{https://github.com/qeeqez/api}{https://github.com/qeeqez/rixl-sdk-python}g' "${service_tmp}/setup.py"
 
 	rm -rf "${service_tmp}/.openapi-generator"
 	rm -f \
