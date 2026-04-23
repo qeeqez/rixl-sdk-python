@@ -1,32 +1,201 @@
 # RIXL Python SDK
 
-The official RIXL Python SDK offers a clean and pythonic way to interact with the RIXL API. It supports asynchronous operations and provides type hints for a better developer experience.
+The official Python client for the [RIXL](https://rixl.com) API.
 
-## Components
+[![PyPI](https://img.shields.io/pypi/v/rixl-sdk-python.svg)](https://pypi.org/project/rixl-sdk-python/)
+[![Python](https://img.shields.io/pypi/pyversions/rixl-sdk-python.svg)](https://pypi.org/project/rixl-sdk-python/)
 
-The SDK is organized into the following modules:
+[Installation](#installation) • [Quick start](#quick-start) • [Authentication](#authentication) • [Resources](#resources) • [Pagination](#pagination) • [Errors](#errors)
 
-- **rixl_feeds_sdk**: Community and content feeds.
-- **rixl_videos_sdk**: Video management and processing.
-- **rixl_images_sdk**: Image upload and processing.
+## Features
+
+- Typed fluent API generated from the RIXL OpenAPI spec
+- Async-first — every call is awaitable
+- Pre-mapped error responses for 400, 401, 403, 404, and 500
+- Pluggable `RequestAdapter` and authentication providers
+- Support for JSON, form, multipart, and plain-text payloads
+
+## Requirements
+
+- Python 3.10+
+- A RIXL API key
 
 ## Installation
 
-You can install the SDK modules using pip:
-
 ```bash
-pip install rixl-feeds-sdk rixl-videos-sdk rixl-images-sdk
+pip install rixl-sdk-python
 ```
 
-## Quick Start
+`microsoft-kiota-bundle` is pulled in as a dependency and provides the HTTP transport, serializers, and `RequestAdapter` implementation.
+
+## Quick start
 
 ```python
-from rixl_feeds_sdk import FeedsApi
+import asyncio
 
-api = FeedsApi()
-# response = api.get_discover_feed()
+from kiota_abstractions.authentication.api_key_authentication_provider import (
+    ApiKeyAuthenticationProvider, KeyLocation,
+)
+from kiota_http.httpx_request_adapter import HttpxRequestAdapter
+
+from rixl_client import RixlClient
+
+
+async def main() -> None:
+    auth = ApiKeyAuthenticationProvider(
+        api_key="YOUR_RIXL_API_KEY",
+        parameter_name="X-API-Key",
+        key_location=KeyLocation.Header,
+    )
+    adapter = HttpxRequestAdapter(auth)
+    client = RixlClient(adapter)
+
+    image = await client.images.by_image_id("PS5IMKoFLm").get()
+    print(image.id, image.width, image.height)
+
+
+asyncio.run(main())
 ```
 
-## Documentation
+Base URL defaults to `https://api.rixl.com`. Override with `adapter.base_url = "..."`.
 
-Comprehensive documentation can be found at [docs.rixl.com](https://docs.rixl.com).
+## Authentication
+
+```python
+from kiota_abstractions.authentication.api_key_authentication_provider import (
+    ApiKeyAuthenticationProvider, KeyLocation,
+)
+
+# API key in a header
+auth = ApiKeyAuthenticationProvider(
+    "YOUR_RIXL_API_KEY", "X-API-Key", KeyLocation.Header,
+)
+
+# Bearer token
+# Implement AccessTokenProvider, then wrap with
+# BaseBearerTokenAuthenticationProvider from
+# kiota_abstractions.authentication.base_bearer_token_authentication_provider
+```
+
+## Resources
+
+### Feeds
+
+```python
+posts = await client.feeds.by_feed_id("FD4y3QB38S").get()
+for post in posts.data:
+    print(post.id)
+```
+
+### Images
+
+```python
+# List
+page = await client.images.get()
+
+# Get
+image = await client.images.by_image_id("PS5IMKoFLm").get()
+
+# Delete
+await client.images.by_image_id("PS5IMKoFLm").delete()
+
+# Presigned upload
+from rixl_sdk.models.internal_images_handler.upload_init_request import UploadInitRequest
+
+req = UploadInitRequest()
+req.name = "photo.jpg"
+req.format = "jpeg"
+
+upload = await client.images.upload.init.post(req)
+print(upload.presigned_url)
+```
+
+### Videos
+
+```python
+# List
+videos = await client.videos.get()
+
+# Get
+video = await client.videos.by_video_id("VI9VXQxWXQ").get()
+
+# Subtitle tracks
+tracks = await client.videos.by_video_id("VI9VXQxWXQ").subtitles.get()
+```
+
+## Pagination
+
+List endpoints accept `limit`, `offset`, `sort`, and `order`:
+
+```python
+from kiota_abstractions.base_request_configuration import RequestConfiguration
+from rixl_sdk.images.images_request_builder import ImagesRequestBuilder
+
+limit, offset = 50, 0
+while True:
+    params = ImagesRequestBuilder.ImagesRequestBuilderGetQueryParameters(
+        limit=limit, offset=offset,
+    )
+    page = await client.images.get(
+        request_configuration=RequestConfiguration(query_parameters=params),
+    )
+    for img in page.data:
+        ...
+    if offset + len(page.data) >= page.pagination.total:
+        break
+    offset += limit
+```
+
+## Errors
+
+API errors (400, 401, 403, 404, 500) are raised as `ErrorResponse`:
+
+```python
+from rixl_sdk.models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+
+try:
+    image = await client.images.by_image_id("PS5IMKoFLm").get()
+except ErrorResponse as err:
+    print(f"HTTP {err.code}: {err.error}")
+```
+
+Transport failures (timeouts, connection errors) surface as `httpx` exceptions.
+
+## Models
+
+Generated types live under `rixl_sdk.models.*`:
+
+| Module | Contents |
+|--------|----------|
+| `rixl_sdk.models` | `Image`, `Video`, `Post`, `File` |
+| `rixl_sdk.models.pagination` | `PaginatedResponseImage`, `PaginatedResponseVideo`, `PaginatedResponsePost` |
+| `rixl_sdk.models.internal_images_handler` | Upload request and response payloads for images |
+| `rixl_sdk.models.internal_videos_handler` | Upload request and response payloads for videos |
+| `rixl_sdk.models.github_com_qeeqez_api_internal_errors` | `ErrorResponse` |
+
+Fields are optional — check for `None` before dereferencing.
+
+## Async
+
+Every method is `async def`. Use inside an `asyncio` event loop:
+
+```python
+await client.images.by_image_id("PS5IMKoFLm").get()
+```
+
+The SDK does not ship a synchronous wrapper.
+
+## Development
+
+Regenerate from the OpenAPI spec (run from the monorepo root):
+
+```bash
+brew install kiota
+bash sdk-manager/generate.sh rixl-sdk-python
+```
+
+Generation uses `--clean-output`; do not hand-edit files under `sdk/`.
+
+## Support
+
+Open an issue at [github.com/qeeqez/rixl-sdk-python](https://github.com/qeeqez/rixl-sdk-python/issues).
