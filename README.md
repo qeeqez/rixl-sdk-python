@@ -99,15 +99,24 @@ image = await client.images.by_image_id("PS5IMKoFLm").get()
 # Delete
 await client.images.by_image_id("PS5IMKoFLm").delete()
 
-# Presigned upload
-from rixl_sdk.models.internal_images_handler.upload_init_request import UploadInitRequest
+# Upload (init → PUT bytes to presigned URL → complete)
+import httpx
+from models.internal_images_handler.upload_init_request import UploadInitRequest
+from models.internal_images_handler.complete_request import CompleteRequest
 
-req = UploadInitRequest()
-req.name = "photo.jpg"
-req.format = "jpeg"
+init_req = UploadInitRequest()
+init_req.name = "photo.jpg"
+init_req.format = "jpeg"
+init_res = await client.images.upload.init.post(init_req)
 
-upload = await client.images.upload.init.post(req)
-print(upload.presigned_url)
+async with httpx.AsyncClient() as c:
+    await c.put(init_res.presigned_url, content=image_bytes,
+                headers={"Content-Type": "image/jpeg"})
+
+complete_req = CompleteRequest()
+complete_req.image_id = init_res.image_id
+complete_req.attached_to_video = False
+image = await client.images.upload.complete.post(complete_req)
 ```
 
 ### Videos
@@ -121,6 +130,23 @@ video = await client.videos.by_video_id("VI9VXQxWXQ").get()
 
 # Subtitle tracks
 tracks = await client.videos.by_video_id("VI9VXQxWXQ").subtitles.get()
+
+# Upload (init returns presigned URLs for both the video and a poster image)
+from models.video_upload_init_request import VideoUploadInitRequest
+from models.github_com_qeeqez_api_internal_videos_handler_upload.complete_request \
+    import CompleteRequest as VideoCompleteRequest
+
+init_req = VideoUploadInitRequest()
+init_req.file_name = "clip.mp4"
+init_req.image_format = "jpeg"
+init_res = await client.videos.upload.init.post(init_req)
+
+# PUT video bytes to init_res.video_presigned_url
+# PUT poster bytes to init_res.poster_presigned_url
+
+complete_req = VideoCompleteRequest()
+complete_req.video_id = init_res.video_id
+video = await client.videos.upload.complete.post(complete_req)
 ```
 
 ## Pagination
@@ -170,7 +196,8 @@ Generated types live under `rixl_sdk.models.*`:
 | `rixl_sdk.models` | `Image`, `Video`, `Post`, `File` |
 | `rixl_sdk.models.pagination` | `PaginatedResponseImage`, `PaginatedResponseVideo`, `PaginatedResponsePost` |
 | `rixl_sdk.models.internal_images_handler` | Upload request and response payloads for images |
-| `rixl_sdk.models.internal_videos_handler` | Upload request and response payloads for videos |
+| `models.github_com_qeeqez_api_internal_videos_handler_upload` | Upload request and response payloads for videos |
+| `models.internal_videos_handler_subtitles` | Subtitle PUT payloads |
 | `rixl_sdk.models.github_com_qeeqez_api_internal_errors` | `ErrorResponse` |
 
 Fields are optional — check for `None` before dereferencing.
@@ -185,16 +212,35 @@ await client.images.by_image_id("PS5IMKoFLm").get()
 
 The SDK does not ship a synchronous wrapper.
 
-## Development
+## Examples
 
-Regenerate from the OpenAPI spec (run from the monorepo root):
+Runnable demos live in [`examples/`](./examples):
+
+- `basic/` — list images and fetch one by ID (uses `X-API-Key`).
+- `advanced/` — full image and video upload pipelines (uses `X-API-Key`).
+- `bearer/` — mint a short-lived client JWT via `POST /clientauth/token`, then call with `Authorization: Bearer …`. Use this pattern when the consumer can't safely hold a long-lived API key (browser, mobile).
 
 ```bash
-brew install kiota
-bash sdk-manager/generate.sh rixl-sdk-python
-```
+cd examples
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
-Generation uses `--clean-output`; do not hand-edit files under `sdk/`.
+export RIXL_BASE_URL=http://localhost:8081  # optional
+
+# API key flows
+export RIXL_API_KEY=<key>
+python basic/main.py
+python advanced/main.py
+
+# Client JWT flow
+# Mint your client_id and client_secret in the RIXL dashboard
+# (Organization → Client Auth → Create credential), then:
+export RIXL_CLIENT_ID=<copied from the dashboard>
+export RIXL_CLIENT_SECRET=<copied from the dashboard>
+export RIXL_PROJECT_ID=<project ID>
+export RIXL_SUBJECT=user-42
+python bearer/main.py
+```
 
 ## Support
 
