@@ -5,8 +5,8 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
-    from .github_com_qeeqez_api_internal_videos.video_response import VideoResponse
+    from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
+    from .github_com_rixlhq_api_internal_videos.video_response import VideoResponse
     from .image import Image
     from .post_type import PostType
 
@@ -52,13 +52,13 @@ class Post(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
-        from .github_com_qeeqez_api_internal_videos.video_response import VideoResponse
+        from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
+        from .github_com_rixlhq_api_internal_videos.video_response import VideoResponse
         from .image import Image
         from .post_type import PostType
 
-        from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
-        from .github_com_qeeqez_api_internal_videos.video_response import VideoResponse
+        from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
+        from .github_com_rixlhq_api_internal_videos.video_response import VideoResponse
         from .image import Image
         from .post_type import PostType
 

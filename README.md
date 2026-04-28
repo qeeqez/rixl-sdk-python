@@ -133,7 +133,7 @@ tracks = await client.videos.by_video_id("VI9VXQxWXQ").subtitles.get()
 
 # Upload (init returns presigned URLs for both the video and a poster image)
 from models.video_upload_init_request import VideoUploadInitRequest
-from models.github_com_qeeqez_api_internal_videos_handler_upload.complete_request \
+from models.github_com_rixlhq_api_internal_videos_handler_upload.complete_request \
     import CompleteRequest as VideoCompleteRequest
 
 init_req = VideoUploadInitRequest()
@@ -177,7 +177,7 @@ while True:
 API errors (400, 401, 403, 404, 500) are raised as `ErrorResponse`:
 
 ```python
-from rixl_sdk.models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+from rixl_sdk.models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
 try:
     image = await client.images.by_image_id("PS5IMKoFLm").get()
@@ -196,9 +196,9 @@ Generated types live under `rixl_sdk.models.*`:
 | `rixl_sdk.models` | `Image`, `Video`, `Post`, `File` |
 | `rixl_sdk.models.pagination` | `PaginatedResponseImage`, `PaginatedResponseVideo`, `PaginatedResponsePost` |
 | `rixl_sdk.models.internal_images_handler` | Upload request and response payloads for images |
-| `models.github_com_qeeqez_api_internal_videos_handler_upload` | Upload request and response payloads for videos |
+| `models.github_com_rixlhq_api_internal_videos_handler_upload` | Upload request and response payloads for videos |
 | `models.internal_videos_handler_subtitles` | Subtitle PUT payloads |
-| `rixl_sdk.models.github_com_qeeqez_api_internal_errors` | `ErrorResponse` |
+| `rixl_sdk.models.github_com_rixlhq_api_internal_errors` | `ErrorResponse` |
 
 Fields are optional — check for `None` before dereferencing.
 
@@ -243,4 +243,4 @@ python auth/main.py                          # works with either credential type
 
 ## Support
 
-Open an issue at [github.com/qeeqez/rixl-sdk-python](https://github.com/qeeqez/rixl-sdk-python/issues).
+Open an issue at [github.com/rixlhq/sdk-python](https://github.com/rixlhq/sdk-python/issues).

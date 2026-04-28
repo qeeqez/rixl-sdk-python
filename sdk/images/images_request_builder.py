@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ..models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+    from ..models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
     from ..models.pagination.paginated_response_image import PaginatedResponseImage
     from .item.with_image_item_request_builder import WithImageItemRequestBuilder
     from .upload.upload_request_builder import UploadRequestBuilder
@@ -55,7 +55,7 @@ class ImagesRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from ..models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ..models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ErrorResponse,

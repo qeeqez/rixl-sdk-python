@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+    from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
     from ....models.update_chapters_request import UpdateChaptersRequest
     from ....models.update_chapters_response import UpdateChaptersResponse
 
@@ -40,7 +40,7 @@ class ChaptersRequestBuilder(BaseRequestBuilder):
         request_info = self.to_delete_request_information(
             request_configuration
         )
-        from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ErrorResponse,
@@ -66,7 +66,7 @@ class ChaptersRequestBuilder(BaseRequestBuilder):
         request_info = self.to_put_request_information(
             body, request_configuration
         )
-        from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ErrorResponse,

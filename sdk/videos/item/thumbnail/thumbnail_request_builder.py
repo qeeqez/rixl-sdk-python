@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+    from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
     from ....models.video import Video
     from .thumbnail_put_request_body import ThumbnailPutRequestBody
 
@@ -33,7 +33,7 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: ThumbnailPutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Video]:
         """
-        Update the thumbnail image for an existing video using API key authentication
+        Update the thumbnail image for an existing video
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[Video]
@@ -43,7 +43,7 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
         request_info = self.to_put_request_information(
             body, request_configuration
         )
-        from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ErrorResponse,
@@ -60,7 +60,7 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: ThumbnailPutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Update the thumbnail image for an existing video using API key authentication
+        Update the thumbnail image for an existing video
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

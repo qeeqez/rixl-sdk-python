@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+    from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
 class DeleteRequestBuilder(BaseRequestBuilder):
     """
@@ -38,7 +38,7 @@ class DeleteRequestBuilder(BaseRequestBuilder):
         request_info = self.to_delete_request_information(
             request_configuration
         )
-        from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ErrorResponse,

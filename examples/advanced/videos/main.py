@@ -12,7 +12,7 @@ from kiota_abstractions.authentication.authentication_provider import (
 )
 from kiota_http.httpx_request_adapter import HttpxRequestAdapter
 
-from models.github_com_qeeqez_api_internal_videos_handler_upload.complete_request import (
+from models.github_com_rixlhq_api_internal_videos_handler_upload.complete_request import (
     CompleteRequest,
 )
 from models.video_upload_init_request import VideoUploadInitRequest

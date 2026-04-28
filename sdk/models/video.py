@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .chapter import Chapter
     from .file import File
-    from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
+    from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
     from .image import Image
 
 @dataclass
@@ -58,12 +58,12 @@ class Video(AdditionalDataHolder, Parsable):
         """
         from .chapter import Chapter
         from .file import File
-        from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
+        from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
         from .image import Image
 
         from .chapter import Chapter
         from .file import File
-        from .github_com_qeeqez_api_db_sqlc.plan_type import PlanType
+        from .github_com_rixlhq_api_db_sqlc.plan_type import PlanType
         from .image import Image
 
         fields: dict[str, Callable[[Any], None]] = {

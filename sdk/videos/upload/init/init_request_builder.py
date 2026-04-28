@@ -14,8 +14,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
-    from ....models.github_com_qeeqez_api_internal_videos_handler_upload.init_response import InitResponse
+    from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
+    from ....models.github_com_rixlhq_api_internal_videos_handler_upload.init_response import InitResponse
     from ....models.video_upload_init_request import VideoUploadInitRequest
 
 class InitRequestBuilder(BaseRequestBuilder):
@@ -43,7 +43,7 @@ class InitRequestBuilder(BaseRequestBuilder):
         request_info = self.to_post_request_information(
             body, request_configuration
         )
-        from ....models.github_com_qeeqez_api_internal_errors.error_response import ErrorResponse
+        from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ErrorResponse,
@@ -53,7 +53,7 @@ class InitRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ....models.github_com_qeeqez_api_internal_videos_handler_upload.init_response import InitResponse
+        from ....models.github_com_rixlhq_api_internal_videos_handler_upload.init_response import InitResponse
 
         return await self.request_adapter.send_async(request_info, InitResponse, error_mapping)
     

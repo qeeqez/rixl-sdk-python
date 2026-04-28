@@ -5,7 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .github_com_qeeqez_api_internal_videos_types.chapter_input import ChapterInput
+    from .github_com_rixlhq_api_internal_videos_types.chapter_input import ChapterInput
 
 @dataclass
 class UpdateChaptersRequest(AdditionalDataHolder, Parsable):
@@ -34,9 +34,9 @@ class UpdateChaptersRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .github_com_qeeqez_api_internal_videos_types.chapter_input import ChapterInput
+        from .github_com_rixlhq_api_internal_videos_types.chapter_input import ChapterInput
 
-        from .github_com_qeeqez_api_internal_videos_types.chapter_input import ChapterInput
+        from .github_com_rixlhq_api_internal_videos_types.chapter_input import ChapterInput
 
         fields: dict[str, Callable[[Any], None]] = {
             "chapters": lambda n : setattr(self, 'chapters', n.get_collection_of_object_values(ChapterInput)),

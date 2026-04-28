@@ -5,7 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .github_com_qeeqez_api_db_sqlc.video_quality import VideoQuality
+    from .github_com_rixlhq_api_db_sqlc.video_quality import VideoQuality
 
 @dataclass
 class VideoUploadInitRequest(AdditionalDataHolder, Parsable):
@@ -38,9 +38,9 @@ class VideoUploadInitRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .github_com_qeeqez_api_db_sqlc.video_quality import VideoQuality
+        from .github_com_rixlhq_api_db_sqlc.video_quality import VideoQuality
 
-        from .github_com_qeeqez_api_db_sqlc.video_quality import VideoQuality
+        from .github_com_rixlhq_api_db_sqlc.video_quality import VideoQuality
 
         fields: dict[str, Callable[[Any], None]] = {
             "file_name": lambda n : setattr(self, 'file_name', n.get_str_value()),
