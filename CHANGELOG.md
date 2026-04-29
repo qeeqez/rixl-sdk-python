@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/rixlhq/rixl-python/compare/v0.1.3...v0.1.4) (2026-04-29)
+
+
+### Bug Fixes
+
+* upgrade checkout action and prepare for next release ([e408076](https://github.com/rixlhq/rixl-python/commit/e4080766a5e54d396c2d3f0b63577453bf11f03c))
+
 ## [0.1.3](https://github.com/rixlhq/rixl-python/compare/v0.1.2...v0.1.3) (2026-04-29)
 
 
