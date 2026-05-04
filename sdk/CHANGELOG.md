@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/rixlhq/rixl-python/compare/v0.2.2...v1.0.0) (2026-05-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename pypi package from rixl-python to rixl.
+
+### Features
+
+* rename pypi package from rixl-python to rixl. ([7907585](https://github.com/rixlhq/rixl-python/commit/7907585e09ba568401d938817801250edd9d052c))
+
+
+### Documentation
+
+* update install snippets to pip install rixl ([6ec1dfe](https://github.com/rixlhq/rixl-python/commit/6ec1dfec14a5f0c0b43bc31b5411deafa43a4b83))
+
 ## [0.2.2](https://github.com/rixlhq/rixl-python/compare/v0.2.1...v0.2.2) (2026-04-30)
 
 
