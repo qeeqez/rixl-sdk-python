@@ -1,4 +1,4 @@
-# rixl-python
+# rixl
 
 Python client for the [RIXL](https://rixl.com) API.
 
