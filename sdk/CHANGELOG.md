@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/rixlhq/rixl-python/compare/v1.0.0...v1.0.1) (2026-05-04)
+
+
+### Bug Fixes
+
+* sync sdk/README so pypi page shows ([6657052](https://github.com/rixlhq/rixl-python/commit/665705220e348205d84dd6f391d8e4b54f8daa1f))
+
 ## [1.0.0](https://github.com/rixlhq/rixl-python/compare/v0.2.2...v1.0.0) (2026-05-04)
 
 
