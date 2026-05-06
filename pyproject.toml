@@ -15,8 +15,9 @@ dependencies = [
 ]
 
 [tool.setuptools]
+package-dir = {"" = "sdk"}
 py-modules = ["rixl_client"]
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["sdk"]
 include = ["feeds*", "images*", "videos*", "models*"]
