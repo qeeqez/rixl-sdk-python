@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/rixlhq/rixl-python/compare/v1.1.0...v1.1.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* simpler release please workflow setup ([bf5ef54](https://github.com/rixlhq/rixl-python/commit/bf5ef541d864573e0d591e7ecd7d19a94aa66bdc))
+
 ## [1.1.0](https://github.com/rixlhq/rixl-python/compare/v1.0.1...v1.1.0) (2026-05-06)
 
 
