@@ -57,7 +57,7 @@ class ChaptersRequestBuilder(BaseRequestBuilder):
     async def put(self,body: UpdateChaptersRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UpdateChaptersResponse]:
         """
         Replace all chapters for a video (atomic PUT operation) using API key authentication
-        param body: The request body
+        param body: Chapters array
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UpdateChaptersResponse]
         """
@@ -95,7 +95,7 @@ class ChaptersRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: UpdateChaptersRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Replace all chapters for a video (atomic PUT operation) using API key authentication
-        param body: The request body
+        param body: Chapters array
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

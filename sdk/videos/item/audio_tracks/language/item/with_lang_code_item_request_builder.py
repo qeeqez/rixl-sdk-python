@@ -6,6 +6,7 @@ from kiota_abstractions.base_request_configuration import RequestConfiguration
 from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
+from kiota_abstractions.multipart_body import MultipartBody
 from kiota_abstractions.request_adapter import RequestAdapter
 from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
@@ -14,13 +15,12 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from .....models.subtitle import Subtitle
-    from .....models.subtitle_delete import SubtitleDelete
-    from .with_lang_code_put_request_body import WithLang_codePutRequestBody
+    from ......models.audio_track import AudioTrack
+    from ......models.audio_track_delete import AudioTrackDelete
 
 class WithLang_codeItemRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /videos/{videoId}/subtitles/{lang_code}
+    Builds and executes requests for operations under /videos/{videoId}/audio-tracks/language/{lang_code}
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -29,29 +29,29 @@ class WithLang_codeItemRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/videos/{videoId}/subtitles/{lang_code}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/videos/{videoId}/audio-tracks/language/{lang_code}", path_parameters)
     
-    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SubtitleDelete]:
+    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AudioTrackDelete]:
         """
-        Remove a subtitle for a specific language using API key authentication
+        Remove an audio track for a specific language using API key authentication
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[SubtitleDelete]
+        Returns: Optional[AudioTrackDelete]
         """
         request_info = self.to_delete_request_information(
             request_configuration
         )
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .....models.subtitle_delete import SubtitleDelete
+        from ......models.audio_track_delete import AudioTrackDelete
 
-        return await self.request_adapter.send_async(request_info, SubtitleDelete, None)
+        return await self.request_adapter.send_async(request_info, AudioTrackDelete, None)
     
-    async def put(self,body: WithLang_codePutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Subtitle]:
+    async def put(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AudioTrack]:
         """
-        Add or replace a subtitle for a specific language using API key authentication
+        Add or replace an audio track for a specific language using API key authentication
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[Subtitle]
+        Returns: Optional[AudioTrack]
         """
         if body is None:
             raise TypeError("body cannot be null.")
@@ -60,13 +60,13 @@ class WithLang_codeItemRequestBuilder(BaseRequestBuilder):
         )
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from .....models.subtitle import Subtitle
+        from ......models.audio_track import AudioTrack
 
-        return await self.request_adapter.send_async(request_info, Subtitle, None)
+        return await self.request_adapter.send_async(request_info, AudioTrack, None)
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Remove a subtitle for a specific language using API key authentication
+        Remove an audio track for a specific language using API key authentication
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -75,9 +75,9 @@ class WithLang_codeItemRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_put_request_information(self,body: WithLang_codePutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_put_request_information(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Add or replace a subtitle for a specific language using API key authentication
+        Add or replace an audio track for a specific language using API key authentication
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -87,7 +87,7 @@ class WithLang_codeItemRequestBuilder(BaseRequestBuilder):
         request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "application/json")
-        request_info.set_content_from_parsable(self.request_adapter, "application/x-www-form-urlencoded", body)
+        request_info.set_content_from_parsable(self.request_adapter, "multipart/form-data", body)
         return request_info
     
     def with_url(self,raw_url: str) -> WithLang_codeItemRequestBuilder:

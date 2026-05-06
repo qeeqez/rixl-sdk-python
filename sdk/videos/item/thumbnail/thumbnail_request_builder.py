@@ -6,6 +6,7 @@ from kiota_abstractions.base_request_configuration import RequestConfiguration
 from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
+from kiota_abstractions.multipart_body import MultipartBody
 from kiota_abstractions.request_adapter import RequestAdapter
 from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
@@ -16,7 +17,6 @@ from warnings import warn
 if TYPE_CHECKING:
     from ....models.github_com_rixlhq_api_internal_errors.error_response import ErrorResponse
     from ....models.video import Video
-    from .thumbnail_put_request_body import ThumbnailPutRequestBody
 
 class ThumbnailRequestBuilder(BaseRequestBuilder):
     """
@@ -31,9 +31,9 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/videos/{videoId}/thumbnail", path_parameters)
     
-    async def put(self,body: ThumbnailPutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Video]:
+    async def put(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Video]:
         """
-        Update the thumbnail image for an existing video
+        Update the thumbnail image for an existing video using API key authentication
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[Video]
@@ -58,9 +58,9 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, Video, error_mapping)
     
-    def to_put_request_information(self,body: ThumbnailPutRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_put_request_information(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Update the thumbnail image for an existing video
+        Update the thumbnail image for an existing video using API key authentication
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -70,7 +70,7 @@ class ThumbnailRequestBuilder(BaseRequestBuilder):
         request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "application/json")
-        request_info.set_content_from_parsable(self.request_adapter, "application/x-www-form-urlencoded", body)
+        request_info.set_content_from_parsable(self.request_adapter, "multipart/form-data", body)
         return request_info
     
     def with_url(self,raw_url: str) -> ThumbnailRequestBuilder:

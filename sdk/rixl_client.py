@@ -39,6 +39,9 @@ class RixlClient(BaseRequestBuilder):
         register_default_deserializer(JsonParseNodeFactory)
         register_default_deserializer(TextParseNodeFactory)
         register_default_deserializer(FormParseNodeFactory)
+        if not self.request_adapter.base_url:
+            self.request_adapter.base_url = "https://raw.githubusercontent.com"
+        self.path_parameters["base_url"] = self.request_adapter.base_url
     
     @property
     def feeds(self) -> FeedsRequestBuilder:

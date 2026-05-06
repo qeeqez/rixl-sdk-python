@@ -34,7 +34,7 @@ class InitRequestBuilder(BaseRequestBuilder):
     async def post(self,body: UploadInitRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[InitResponse]:
         """
         Initialize a presigned URL upload for an image file using API key authentication
-        param body: The request body
+        param body: Upload initialization request
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[InitResponse]
         """
@@ -60,7 +60,7 @@ class InitRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: UploadInitRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Initialize a presigned URL upload for an image file using API key authentication
-        param body: The request body
+        param body: Upload initialization request
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

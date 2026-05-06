@@ -34,7 +34,7 @@ class CompleteRequestBuilder(BaseRequestBuilder):
     async def post(self,body: CompleteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[Image]:
         """
         Complete the upload process and create the image record using API key authentication
-        param body: The request body
+        param body: Upload completion request
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[Image]
         """
@@ -61,7 +61,7 @@ class CompleteRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: CompleteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Complete the upload process and create the image record using API key authentication
-        param body: The request body
+        param body: Upload completion request
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
